@@ -5,17 +5,17 @@
 -->
 
 <template>
-	<view class="container">
-    <view class="Top">
-      <view class="logo"><img src="static/images/logo.png"></view>
-      <p>耕农千问</p>
-    </view>
+	<view class="container" :style="{ paddingTop: distanceFromTop + 'px' }">
+		<view class="Top">
+		  <view class="logo"><img src="static/images/logo.png"></view>
+		  <p>耕农千问</p>
+		</view>
 		<view class="QandA">
-      <view class="BottomRow">
+		<view class="BottomRow">
             <view class="ButtonLeft">左侧</view>
             <view class="ButtonMiddle">中间</view>
             <view class="Search"><u-search placeholder="日照香炉生紫烟" v-model="keyword"></u-search></view>
-            </view>
+        </view>
     </view>
     
 	</view>
@@ -23,13 +23,24 @@
 
 <script>
 	import { getHistoryAPI } from '@/services/home'
+	
+	// 获取屏幕边界到安全区域的一个距离
+	
 	export default {
 		data() {
 			return {
-				history: []
+				history: [],
+				keyword: '',
+				distanceFromTop: 0
 			};
 		},
 		onLoad(options) {
+			const sysInfo = uni.getSystemInfoSync()
+			this.distanceFromTop = sysInfo.safeAreaInsets.top
+			console.log(this.distanceFromTop)
+			console.log(this.distanceFromTop)
+			console.log(this.distanceFromTop)
+			console.log(this.distanceFromTop)
 			this.getHistory()
 		},
 		methods: {

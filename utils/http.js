@@ -13,7 +13,7 @@ import store from '@/store/store.js'
  *   4. 添加 token 请求头标识
  */
 
-const baseURL = 'http://jsonplaceholder.typicode.com'
+const baseURL = 'https://mock.apifox.com/m2/4366307-4010223-default'
 
 // 添加拦截器
 const httpInterceptor = {
@@ -26,12 +26,11 @@ const httpInterceptor = {
     // 2. 请求超时, 默认 60s
     options.timeout = 10000
     // 3. 添加请求头
-    options.header = {
-      ...options.header,
+    options.headers = {
+      ...options.headers,
     }
     // 4. 添加 token 请求头标识
-	// 使用 mapState 辅助函数获取 Vuex 模块中的数据
-	const { token } = mapState('m_user', ['token'])
+	const token = store.state.m_user.token;
     if (token) {
       options.header.Authorization = token
     }
@@ -45,9 +44,7 @@ uni.addInterceptor('uploadFile', httpInterceptor)
  * @param  UniApp.RequestOptions
  * @returns Promise
  *  1. 返回 Promise 对象
- *  2. 获取数据成功
- *    2.1 提取核心数据 res.data
- *    2.2 添加类型，支持泛型
+ *  2. 获取数据成功, 提取核心数据 res.data
  *  3. 获取数据失败
  *    3.1 401错误  -> 清理用户信息，跳转到登录页
  *    3.2 其他错误 -> 根据后端错误信息轻提示
@@ -67,9 +64,7 @@ export const http = (options) => {
           resolve(res.data)
         } else if (res.statusCode === 401) {
           // 401错误  -> 清理用户信息，跳转到登录页
-		  // 使用 mapMutations 辅助函数获取 Vuex 模块中的方法
-		  const { updateToken } = mapMutations('m_user', ['updateToken'])
-		  updateToken()
+		  store.commit('m_user/updateToken');
           uni.navigateTo({ url: '/pages/my/my' })
           reject(res)
         } else {
