@@ -9,7 +9,7 @@ import store from '@/store/store.js'
  * TODO:
  *   1. 非 http 开头需拼接地址
  *   2. 请求超时
- *   3. 添加小程序端请求头标识
+ *   3. 添加请求头
  *   4. 添加 token 请求头标识
  */
 

@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
-    'm_user': moduleUser
+    'm_user': moduleUser,
   }
 })
 
