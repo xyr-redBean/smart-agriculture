@@ -34,6 +34,15 @@
 			"navigationBarTitleText" : "",
 			"enablePullDownRefresh" : false
 		}
+	},
+	{
+	  "path" : "pages/history/history",
+	  "style" : 
+	  {
+	    "navigationBarTitleText" : "历史对话",
+      "navigationBarBackgroundColor": "rgba(15, 255, 79, 0.18)",
+	    "enablePullDownRefresh" : false
+	  }
 	}],
 	"subPackages": [{
 		"root": "subpkg",
