@@ -1,4 +1,4 @@
-<!-- 有个小问题就是写着写着发现咱们这个页面是不是得考虑下不同设备-->
+<!-- 2024.4.20有个小问题就是写着写着发现咱们这个页面是不是得考虑下不同设备-->
 <!-- 如果需要的话，那我明天再改一改，不过上午有点事情，得拖到下午估计
 还有就是这个字体（耕农千问）和图片，找不到它那种，就暂时随便选了种 
 然后就暂时写了这点
@@ -12,10 +12,10 @@
 		</view>
 		<view class="QandA">
 		<view class="BottomRow">
-            <view class="ButtonLeft">
+            <view class="ButtonLeft" @click="goToHistory">
 				<u-icon name="clock" color='green'></u-icon>
 			</view>
-            <view class="ButtonMiddle">
+            <view class="ButtonMiddle" >
 				<u-icon name="plus-circle-fill" color='green'></u-icon>
 			</view>
             <view class="Search"><u-search placeholder="日照香炉生紫烟" v-model="keyword"></u-search></view>
@@ -47,7 +47,10 @@
 		  getHistory: async function() {
 		    const res = await getHistoryAPI();
 		    console.log(res);
-		  }
+		  },
+      goToHistory(){
+         uni.navigateTo({ url: '/pages/history/history' });
+      }
 		}
 	}
 </script>
@@ -112,10 +115,6 @@
     	text-align: center; // 文字居中
     	// ...其他样式
   	}
-    .Search{
-      flex-grow: 1; // 让搜索框占据剩余空间
-      background-color: rgba(17, 156, 75, 0.08); // 设置搜索框背景颜色
-    }
   }
 }
 </style>

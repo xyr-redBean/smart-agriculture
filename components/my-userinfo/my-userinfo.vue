@@ -81,10 +81,6 @@ page {
 	height: 100%;
 	background: linear-gradient(to bottom, #7ae790, #ffffff);
 }
-.navigationBar {
-  font-size: 20px; /* 设置字体大小为 20 像素 */
-  font-weight: bold; /* 设置字体加粗 */
-}
 .container {
 	height: 100%;
 	.personalInfo {
