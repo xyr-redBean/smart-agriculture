@@ -7,7 +7,7 @@
 		"path" : "pages/my/my",
 		"style" : 
 		{
-			"navigationBarTitleText" : "",
+			"navigationBarTitleText" : "耕农千问",
 			"enablePullDownRefresh" : false
 		}
 	},
@@ -15,7 +15,7 @@
 		"path" : "pages/expert/expert",
 		"style" : 
 		{
-			"navigationBarTitleText" : "",
+			"navigationStyle": "custom",
 			"enablePullDownRefresh" : false
 		}
 	},
