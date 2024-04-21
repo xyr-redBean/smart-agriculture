@@ -41,17 +41,24 @@
 	},
 	"tabBar": {
 		"selectedColor": "#C00000",
+    // 因为我好像不知道如何从原稿中弄下图标来，就先到网上找了类似的
 		"list": [{
 				"pagePath": "pages/home/home",
-				"text": "首页"
+				"text": "首页",
+        "iconPath": "static/images/首页.png",
+        "selectedIconPath": "static/images/首页_selected.png"
 			},
 			{
 				"pagePath": "pages/expert/expert",
-				"text": "专家"
+				"text": "专家",
+        "iconPath": "static/images/专家.png",
+        "selectedIconPath": "static/images/专家_selected.png"
 			},
 			{
 				"pagePath": "pages/my/my",
-				"text": "我的"
+				"text": "我的",
+        "iconPath": "static/images/个人.png",
+        "selectedIconPath": "static/images/个人_selected.png"
 			}
 		]
 	}

@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "uview-ui": "^2.0.36"
+    "uview-ui": "^2.0.31"
   },
   "devDependencies": {
     "@eslint/js": "^9.1.1",
