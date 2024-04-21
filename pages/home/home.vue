@@ -7,13 +7,17 @@
 <template>
 	<view class="container" :style="{ paddingTop: distanceFromTop + 'px' }">
 		<view class="Top">
-		  <view class="logo"><img src="static/images/logo.png"></view>
+		  <view class="logo"><img src="@/static/images/logo.png"></view>
 		  <p>耕农千问</p>
 		</view>
 		<view class="QandA">
 		<view class="BottomRow">
-            <view class="ButtonLeft">左侧</view>
-            <view class="ButtonMiddle">中间</view>
+            <view class="ButtonLeft">
+				<u-icon name="clock" color='green'></u-icon>
+			</view>
+            <view class="ButtonMiddle">
+				<u-icon name="plus-circle-fill" color='green'></u-icon>
+			</view>
             <view class="Search"><u-search placeholder="日照香炉生紫烟" v-model="keyword"></u-search></view>
         </view>
     </view>
@@ -37,10 +41,6 @@
 		onLoad(options) {
 			const sysInfo = uni.getSystemInfoSync()
 			this.distanceFromTop = sysInfo.safeAreaInsets.top
-			console.log(this.distanceFromTop)
-			console.log(this.distanceFromTop)
-			console.log(this.distanceFromTop)
-			console.log(this.distanceFromTop)
 			this.getHistory()
 		},
 		methods: {

@@ -1,11 +1,12 @@
 <template>
-	<view>
-		<my-userinfo></my-userinfo>
+	<view class="">
+		My
 	</view>
 </template>
 
 <script>
 	export default {
+		name:"my-userinfo",
 		data() {
 			return {
 				

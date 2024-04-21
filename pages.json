@@ -1,6 +1,7 @@
 {
 	"easycom": {
-		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue",
+		"^my-(.*)": "@/components/my-$1/my-$1.vue"
 	},
 	"pages": [{
 		"path" : "pages/my/my",
@@ -23,6 +24,14 @@
 		"style" : 
 		{
 			"navigationStyle": "custom",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/login/login",
+		"style" : 
+		{
+			"navigationBarTitleText" : "",
 			"enablePullDownRefresh" : false
 		}
 	}],
