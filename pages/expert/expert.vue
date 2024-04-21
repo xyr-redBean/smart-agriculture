@@ -29,7 +29,7 @@
 	       
 	      </template>
 	    </scroll-view>
-	  </view>
+	</view>
 </template>
 
 <script>
@@ -44,11 +44,7 @@
 					'https://cdn.uviewui.com/uview/swiper/swiper3.png',
 				]
 			};
-		},
-		onLoad(options) {
-			const sysInfo = uni.getSystemInfoSync()
-			this.distanceFromTop = sysInfo.safeAreaInsets.top
-		},
+		}
 	}
 </script>
 
