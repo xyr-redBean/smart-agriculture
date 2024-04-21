@@ -61,7 +61,7 @@
 </script>
 
 <style>
-.chat-container{
+.chat-container {
   left: -7px;
   top: -5.35px;
   width: 782rpx;
@@ -69,27 +69,28 @@
   background: linear-gradient(180deg, rgba(15, 255, 79, 0.18) 0.07%, rgba(79, 255, 158, 0) 75.38%);
 }
 
-.chat-header{
+.chat-header {
   display: flex;
   justify-content: space-between;
   margin-left: 32rpx;
   margin-right: 32rpx;
   height: 62rpx;
-  
-  .year-month-selector{
-    display: flex;
-    align-items: center; /* 垂直居中 */
-    justify-content: center; /* 水平居中 */
-    width: 232rpx;
-    height: 62rpx;
-    opacity: 1;
-    border-radius: 101.92px;
-    background: rgba(255, 255, 255, 1);
-  }
-  .delete img{
-    margin-right: 20rpx;
-    width: 43rpx;
-    height: 43rpx;
-  }
+}
+
+.chat-header .year-month-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 232rpx;
+  height: 62rpx;
+  opacity: 1;
+  border-radius: 101.92px;
+  background: rgba(255, 255, 255, 1);
+}
+
+.chat-header .delete img {
+  margin-right: 20rpx;
+  width: 43rpx;
+  height: 43rpx;
 }
 </style>
