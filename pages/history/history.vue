@@ -7,7 +7,7 @@
         </picker>
       </view>
       <view class="delete">
-        <img src="static/images/回收站.png" alt="Delete" />
+        <img src="@/static/images/回收站.png" alt="Delete" />
       </view>
     </view>
    <view class="chat-message">

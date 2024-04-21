@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<my-userinfo></my-userinfo>
+		<my-login></my-login>
 	</view>
 </template>
 
