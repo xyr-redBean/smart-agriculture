@@ -11,11 +11,15 @@
         <img src="@/static/images/回收站.png" alt="Delete" />
       </view>
     </view>
+    
     <view class="chat-message">
       <view class="message" v-for="(message, index) in messages" :key="message.id">
-        <view class="message-box">
-          <view class="message-text">{{ message.text }}</view>
-          <view class="message-time">{{ message.time }}</view>
+        <view class="message-wrapper">
+          <view class="additional-box"><span>111</span><span>1</span><span>1</span></view>
+          <view class="message-box">
+            <view class="message-text">{{ message.text }}</view>
+            <view class="message-time">{{ message.time }}</view>
+          </view>
         </view>
       </view>
       <view class="end-message" v-if="messages.length > 0">已经到底了</view>
@@ -141,18 +145,19 @@
   }
 .message-box {
   display: flex;
-  margin-left: 104rpx;
+  margin-right: 48rpx;
+  margin-left: 50rpx;
   padding-left: 46rpx;
   padding-right: 46rpx;
   flex-direction: column;
   justify-content: center; /* 垂直居中 */
   margin-top: 44rpx;
   height: 120rpx;
-  width: 616rpx;
+  width: 590rpx;
   opacity: 1;
   border-radius: 19rpx;
   background: rgba(255, 255, 255, 1);
-
+  
   .message-text {
     font-size: 15.38px;
     font-weight: 500;
@@ -176,4 +181,27 @@
     vertical-align: top;
   }
 }
+.message-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative; /* 添加相对定位 */
+  margin-left: 34rpx; /* 调整为与.additional-box的宽度一致 */
+  border-left: 0.96px solid rgba(199, 199, 199, 1);
+}
+
+.additional-box {
+  display: flex;
+  flex-direction: column;
+  width: 34rpx;
+  background-image:url("@/static/images/装饰2.png"); /* 使用背景图和线性渐变 */
+  background-repeat: no-repeat; /* 背景图不重复 */
+  background-size: contain; /* 调整背景图像大小以适应元素 */
+  background-position: center; /* 背景图垂直水平居中 */
+  font-size: 0; /* 字体大小为0 */
+  position: absolute; /* 添加绝对定位 */
+  top: 0; /* 与父容器顶部对齐 */
+  bottom: 0; /* 与父容器底部对齐 */
+  height: 100%; /* 充满父容器的高度 */
+}
+
 </style>

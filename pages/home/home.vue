@@ -5,7 +5,7 @@
       <img src="@/static/images/logo.png" alt="" />
       <p>耕农千问</p>
     </view>
-    <view class="content">
+    <view class="content" :class="{ 'Background': dialogues.length > 0 }">
       <view class="talking">
         <view class="dialogue iAsk">
           <span>今天星期几</span>
@@ -44,7 +44,8 @@
         value: '', // 绑定输入框的值
 				history: [],
 				keyword: '',
-				distanceFromTop: 0
+				distanceFromTop: 0,
+        dialogues:[],// 聊天内容
 			};
 		},
 		onLoad(options) {
@@ -52,7 +53,7 @@
 			const sysInfo = uni.getSystemInfoSync()
 			this.distanceFromTop = sysInfo.safeAreaInsets.top
 			// 获取AI问答历史数据
-			this.getHistory()
+			this.getHistory()  
 		},
 		methods: {
 		  // 获取AI问答历史数据
@@ -103,6 +104,9 @@
 }
 
 .content {
+  &.Background{
+    background: rgba(17,156,75,0.08) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="rgba(58, 207, 120, 0.16)" font-size="80px" font-weight="900" letter-spacing="0px" line-height="118.4px" font-family="Gill Sans, Gill Sans MT, Calibri, Trebuchet MS, sans-serif">耕农千问</text></svg>') center/contain no-repeat !important;
+  }
   position: relative; /* 设置相对定位 */
   flex: 1;
   margin-left: 32rpx;
@@ -110,7 +114,6 @@
   padding-top: 42rpx;
   opacity: 1;
   border-radius: 32px;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="rgba(58, 207, 120, 0.16)" font-size="80px" font-weight="900" letter-spacing="0px" line-height="118.4px" font-family="Gill Sans, Gill Sans MT, Calibri, Trebuchet MS, sans-serif">耕农千问</text></svg>') center/contain no-repeat; /* 将SVG作为背景图片 */
   background-color: rgba(17,156,75,0.08);
   box-shadow: 0px -1px 5px rgba(88, 99, 255, 0.1);
   .dialogue {
@@ -121,7 +124,7 @@
     margin-bottom: 10px;
     clear: both;
   }
-  
+
   .iAsk {
     float: right; /* iAsk 浮动到右边 */
     background-color: rgba(58,207,120,0.96); /* iAsk 背景色 */
@@ -169,29 +172,41 @@
       justify-content: center; /* 水平居中 */
       align-items: center; /* 垂直居中 */
  	  }
-    .input::placeholder {
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 0px;
-      line-height: 18.56px;
-      color: rgba(1, 148, 62, 0.51);
-      text-align: left;
-      vertical-align: top;
-    }
     .search{
-      margin-right: 0;
       display: flex;
-      width: 450rpx;
       flex: 1; /* 占据剩余空间 */
-     input {
+      margin-bottom: 18rpx;
+      height: 76rpx;
+      width: 470rpx;
+      border-radius: 40rpx; /* 圆角 */
+      outline: none; /* 去除输入框点击时的边框阴影 */
+      background: rgba(60, 199, 118, 0.17);
+      // 输入框
+      .input{
+       height: 76rpx;
+       min-height: 70rpx;
        flex: 1; /* 占据剩余空间 */
-       padding: 12rpx; /* 内边距 */
-       border-radius: 40rpx; /* 圆角 */
-       outline: none; /* 去除输入框点击时的边框阴影 */
-       background: rgba(60, 199, 118, 0.17);
        padding-left: 26rpx;
-     }
-     .search-icon {
+      }
+      // 图片
+      .search-icon{
+        display: flex;
+        justify-content: center; /* 水平居中 */
+        align-items: center; /* 垂直居中 */
+        margin-top: 5rpx;
+        margin-right: 15rpx;
+        img{
+          width: 35rpx;
+          height: 30rpx;
+        }
+      }
+    }
+  }
+}
+</style>
+
+
+<!--     .search-icon {
        position: absolute; /* 绝对定位 */
        right: 12rpx; /* 距离右侧 12px */
        top: 50%; /* 垂直居中 */
@@ -203,8 +218,26 @@
         width: 35rpx;
         height: 30rpx;
       }
-     }
-    }
-  }
-}
-</style>
+     } -->
+     
+<!--     .input::placeholder {
+       font-size: 14px;
+       font-weight: 400;
+       letter-spacing: 0px;
+       line-height: 18.56px;
+       color: rgba(1, 148, 62, 0.51);
+       text-align: left;
+       vertical-align: top;
+     }   -->
+     
+<!--     // 输入框
+     input {
+       height: 76rpx;
+       min-height: 70rpx;
+       flex: 1; /* 占据剩余空间 */
+       padding: 12rpx; /* 内边距 */
+       border-radius: 40rpx; /* 圆角 */
+       outline: none; /* 去除输入框点击时的边框阴影 */
+       background: rgba(60, 199, 118, 0.17);
+       padding-left: 26rpx;
+     } -->
