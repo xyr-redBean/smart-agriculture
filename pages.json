@@ -42,7 +42,7 @@
 			  "style" : 
 			  {
 				"navigationBarTitleText" : "历史对话",
-				"navigationBarBackgroundColor": "#0FFF4F",
+				"navigationBarBackgroundColor": "#d1fadd",
 				"enablePullDownRefresh" : false
 			  }
 		}]
