@@ -232,9 +232,9 @@ export default {
 			default() {
 				return {
 					color: '#333',
-					backgroundColor: '#fff',
-					disableColor: '#F7F6F6',
-					borderColor: '#e5e5e5'
+					backgroundColor: 'rgba(60, 199, 118, 0.17)',
+					disableColor: 'rgba(60, 199, 118, 0.17)',
+					borderColor: 'rgba(60, 199, 118, 0.17)'
 				};
 			}
 		},
@@ -540,6 +540,7 @@ $uni-border-1: #dcdfe6 !default;
 	line-height: 1;
 	font-size: 14px;
 	height: 35px;
+  
 	// min-height: 36px;
 }
 

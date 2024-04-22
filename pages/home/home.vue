@@ -21,14 +21,16 @@
         <view class="ButtonMiddle" >
           <u-icon class="circle" name="plus-circle-fill" color='green'></u-icon>
         </view>
-        <view style="margin-left: 15rpx;">
-			 <u--input
-			    placeholder="请输入内容"
-			    border="surround"
-			    v-model="value"
-			    @change="change"
-			  ></u--input>
-		</view>
+        <view class="search" style="margin-left: 15rpx;margin-right: 0;">
+          <input 
+              class="input" 
+              v-model="value"
+              placeholder="有什么问题尽管问我哦~"
+          />
+          <view class="search-icon" @click="onClick">
+            <img src="@/static/images/search.png" alt="" />
+          </view>
+        </view>
       </view>
     </view>
   </view>
@@ -39,8 +41,7 @@
 	export default {
 		data() {
 			return {
-				// history: [],
-				keyword: '',
+				value: '', // 绑定输入框的值
 				distanceFromTop: 0
 			};
 		},
@@ -58,8 +59,12 @@
 		  //   console.log(res);
 		  // },
 		  goToHistory(){
-			 uni.navigateTo({ url: '/pages/history/history' });
-		  }
+			 uni.navigateTo({ url: '/subpkg/history/history' });
+		  },
+      // 输入框
+      onClick(){
+        console.log(1)
+      }
 		}
 	}
 </script>
@@ -68,7 +73,7 @@
 .container {
   display: flex;
   flex-direction: column; /* 垂直方向排列子元素 */
-  height: calc(100vh - 70rpx); /* 视口高度减去 .top 的高度 */
+  height: calc(100vh - 10rpx); /* 视口高度减去 .top 的高度 */
 }
 
 .top {
@@ -162,7 +167,42 @@
       justify-content: center; /* 水平居中 */
       align-items: center; /* 垂直居中 */
  	  }
+    .input::placeholder {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0px;
+      line-height: 18.56px;
+      color: rgba(1, 148, 62, 0.51);
+      text-align: left;
+      vertical-align: top;
+    }
+    .search{
+      margin-right: 0;
+      display: flex;
+      width: 450rpx;
+      flex: 1; /* 占据剩余空间 */
+     input {
+       flex: 1; /* 占据剩余空间 */
+       padding: 12rpx; /* 内边距 */
+       border-radius: 40rpx; /* 圆角 */
+       outline: none; /* 去除输入框点击时的边框阴影 */
+       background: rgba(60, 199, 118, 0.17);
+       padding-left: 26rpx;
+     }
+     .search-icon {
+       position: absolute; /* 绝对定位 */
+       right: 12rpx; /* 距离右侧 12px */
+       top: 50%; /* 垂直居中 */
+       transform: translateY(-50%); /* 垂直居中 */
+       cursor: pointer; /* 设置鼠标指针为手型 */
+      img{
+        margin-right: 10rpx;
+        margin-bottom: 5rpx;
+        width: 35rpx;
+        height: 30rpx;
+      }
+     }
+    }
   }
 }
-
 </style>
