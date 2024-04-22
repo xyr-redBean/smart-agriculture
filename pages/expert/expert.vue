@@ -44,6 +44,11 @@
 					'https://cdn.uviewui.com/uview/swiper/swiper3.png',
 				]
 			};
+		},
+		onLoad(options) {
+			// 获取屏幕边界到安全区域的一个距离
+			const sysInfo = uni.getSystemInfoSync()
+			this.distanceFromTop = sysInfo.safeAreaInsets.top
 		}
 	}
 </script>

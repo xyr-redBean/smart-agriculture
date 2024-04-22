@@ -1,8 +1,8 @@
 <!--  1 -->
 <template>
-  <view class="container">
+  <view class="container" :style="{ paddingTop: distanceFromTop + 'px' }">
     <view class="top">
-      <img src="static/images/logo.png" alt="" />
+      <img src="@/static/images/logo.png" alt="" />
       <p>耕农千问</p>
     </view>
     <view class="content">
@@ -29,9 +29,6 @@
 
 <script>
 	import { getHistoryAPI } from '@/services/home'
-	
-	// 获取屏幕边界到安全区域的一个距离
-	
 	export default {
 		data() {
 			return {
@@ -41,18 +38,21 @@
 			};
 		},
 		onLoad(options) {
+			// 获取屏幕边界到安全区域的一个距离
 			const sysInfo = uni.getSystemInfoSync()
 			this.distanceFromTop = sysInfo.safeAreaInsets.top
+			// 获取AI问答历史数据
 			this.getHistory()
 		},
 		methods: {
+		  // 获取AI问答历史数据
 		  getHistory: async function() {
 		    const res = await getHistoryAPI();
 		    console.log(res);
 		  },
-      goToHistory(){
-         uni.navigateTo({ url: '/pages/history/history' });
-      }
+		  goToHistory(){
+			 uni.navigateTo({ url: '/pages/history/history' });
+		  }
 		}
 	}
 </script>

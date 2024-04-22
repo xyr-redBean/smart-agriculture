@@ -4,7 +4,7 @@
 		<view class="personalInfo">
 			<image src="@/static/images/default-avatar.jpg" class="avatar" />
 			<view class="container2">
-			  <text class="tag">点击登录</text>
+			  <view class="tag">点击登录</view>
 			</view>
 	    </view>
 		<!-- 面板区域 -->
@@ -12,7 +12,13 @@
 				<!-- 第1个面板 -->
 				<view class="panel">
 					<view class="panel-title">
-						专家咨询订单
+						<view class="order">
+							专家咨询订单
+						</view>
+						<view class="all">
+							全部
+							<uni-icons type="arrowright" size="10"></uni-icons>
+						</view>
 					</view>
 					<view class="panel-body">
 						<view class="panel-item">
@@ -95,13 +101,24 @@ page {
 		.panel {
 			background-color: white;
 			border-radius: 15px;
-			margin: 20px 0;
+			margin-bottom: 30px;
+			margin-top: 20px;
+			padding: 0 5px;
 	
-			.panel-title {
-				line-height: 45px;
-				padding-left: 10px;
-				font-size: 15px;
+			.panel-title{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding-left: 10px;			
 				border-bottom: 1px solid #F4F4F4;
+				.order{
+					line-height: 45px;
+					font-size: 15px;
+				}
+				.all{
+					font-size: 12px;
+					color: rgba(163, 163, 163, 1);
+				}
 			}
 	
 			.panel-body {
