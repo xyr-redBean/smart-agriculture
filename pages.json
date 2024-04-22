@@ -34,19 +34,18 @@
 			"navigationBarTitleText" : "",
 			"enablePullDownRefresh" : false
 		}
-	},
-	{
-	  "path" : "pages/history/history",
-	  "style" : 
-	  {
-	    "navigationBarTitleText" : "历史对话",
-		"navigationBarBackgroundColor": "#0FFF4F",
-	    "enablePullDownRefresh" : false
-	  }
 	}],
 	"subPackages": [{
 		"root": "subpkg",
-		"pages": []
+		"pages": [{
+			  "path" : "history/history",
+			  "style" : 
+			  {
+				"navigationBarTitleText" : "历史对话",
+				"navigationBarBackgroundColor": "#0FFF4F",
+				"enablePullDownRefresh" : false
+			  }
+		}]
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
