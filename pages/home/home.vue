@@ -39,7 +39,7 @@
 	export default {
 		data() {
 			return {
-				history: [],
+				// history: [],
 				keyword: '',
 				distanceFromTop: 0
 			};
@@ -49,14 +49,14 @@
 			const sysInfo = uni.getSystemInfoSync()
 			this.distanceFromTop = sysInfo.safeAreaInsets.top
 			// 获取AI问答历史数据
-			this.getHistory()
+			// this.getHistory()
 		},
 		methods: {
 		  // 获取AI问答历史数据
-		  getHistory: async function() {
-		    const res = await getHistoryAPI();
-		    console.log(res);
-		  },
+		  // getHistory: async function() {
+		  //   const res = await getHistoryAPI();
+		  //   console.log(res);
+		  // },
 		  goToHistory(){
 			 uni.navigateTo({ url: '/pages/history/history' });
 		  }
