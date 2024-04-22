@@ -28,7 +28,7 @@
               placeholder="有什么问题尽管问我哦~"
           />
           <view class="search-icon" @click="onClick">
-            <img src="@/static/images/search(1).png" alt="" />
+            <img src="@/static/images/search.png" alt="" />
           </view>
         </view>
       </view>
