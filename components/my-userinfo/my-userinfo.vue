@@ -1,60 +1,60 @@
 <template>
 	<view class="container">
-			<!-- 导航栏 -->
-			<view class="navigation">
-				<view class="title">
-					耕农千问
-				</view>
+		<!-- 导航栏 -->
+		<view class="navigation">
+			<view class="title">
+				耕农千问
 			</view>
-			<!-- 头像昵称区域 -->
-			<view class="personalInfo">
-				<image src="https://img.js.design/assets/smartFill/img328164da748e08.jpeg" class="avatar" />
-				<view class="container2">
-				  <text class="tag">张三</text>
-				  <view class="modify">
-				  	修改资料
-					<uni-icons type="forward" size="12"></uni-icons>
-				  </view>
-				</view>
-		    </view>
-			<!-- 面板区域 -->
-				<view class="panel-list">
-					<!-- 第1个面板 -->
-					<view class="panel">
-						<view class="panel-title">
-							<view class="order">
-								专家咨询订单
-							</view>
-							<view class="all">
-								全部
-								<uni-icons type="arrowright" size="10"></uni-icons>
-							</view>
+		</view>
+		<!-- 头像昵称区域 -->
+		<view class="personalInfo">
+			<image src="https://img.js.design/assets/smartFill/img328164da748e08.jpeg" class="avatar" />
+			<view class="container2">
+			  <text class="tag">张三</text>
+			  <view class="modify">
+				修改资料
+				<uni-icons type="forward" size="12"></uni-icons>
+			  </view>
+			</view>
+		</view>
+		<!-- 面板区域 -->
+			<view class="panel-list">
+				<!-- 第1个面板 -->
+				<view class="panel">
+					<view class="panel-title">
+						<view class="order">
+							专家咨询订单
 						</view>
-						<view class="panel-body">
-							<view class="panel-item" v-for="(item, index) in panelList1" :key="item.id">
-								<view class="badge">
-									<uni-badge class="uni-badge-left-margin" text="1" />
-								</view>
-								<uni-icons :type="item.icon" size="30"></uni-icons>
-								<text>{{ item.type }}</text>
-							</view>
-							
+						<view class="all">
+							全部
+							<uni-icons type="arrowright" size="10"></uni-icons>
 						</view>
 					</view>
-			
-					<!-- 第2个面板 -->
-					<view class="panel">
-						<view class="panel-list-item" v-for="(item, index) in panelList2" :key="item.id">
-							<view class="ahead">
-								<uni-icons custom-prefix="iconfont" :type="item.icon" size="21" color="#3ACF78" style="margin-right: 25rpx;"></uni-icons>
-								<text>{{ item.type }}</text>
+					<view class="panel-body">
+						<view class="panel-item" v-for="(item, index) in panelList1" :key="item.id">
+							<view class="badge">
+								<uni-badge class="uni-badge-left-margin" text="1" />
 							</view>
-							<uni-icons type="arrowright" size="15"></uni-icons>
+							<uni-icons :type="item.icon" size="30"></uni-icons>
+							<text>{{ item.type }}</text>
 						</view>
+						
+					</view>
+				</view>
+		
+				<!-- 第2个面板 -->
+				<view class="panel">
+					<view class="panel-list-item" v-for="(item, index) in panelList2" :key="item.id">
+						<view class="ahead">
+							<uni-icons custom-prefix="iconfont" :type="item.icon" size="21" color="#3ACF78" style="margin-right: 25rpx;"></uni-icons>
+							<text>{{ item.type }}</text>
+						</view>
+						<uni-icons type="arrowright" size="15"></uni-icons>
 					</view>
 				</view>
 			</view>
 		</view>
+	</view>
 </template>
 
 <script>
