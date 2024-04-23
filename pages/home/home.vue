@@ -1,4 +1,4 @@
-<!--  1 -->
+<!-- 还缺少个将聊天数据传给数据库，这个应该可以等后端弄完再写吧 -->
 <template>
   <view class="container" :style="{ paddingTop: distanceFromTop + 'px' }">
     <view class="top">
@@ -24,9 +24,9 @@
           <u-icon class="circle" name="plus-circle-fill" color='green'></u-icon>
         </view>
         <view class="search" style="margin-left: 15rpx;margin-right: 0;">
-          <input class="input" v-model="value_ask" placeholder="有什么问题尽管问我哦~" />
+          <input class="input" v-model="value_ask" :placeholder="placeHolder" placeholder-class="placeholder-style" />
           <view class="search-icon" @click="onClick">
-            <img src="@/static/images/search.png" alt="" />
+            <img :src="isSearching ? '/static/images/loading.png' : '/static/images/search.png'" alt="" />
           </view>
         </view>
       </view>
@@ -41,6 +41,8 @@
   export default {
     data() {
       return {
+        isSearching: false, // 控制搜索图标状态
+        placeHolder: "有什么问题尽管问我哦",
         value_ask: '', // 绑定输入框的值
         history: [],
         keyword: '',
@@ -56,15 +58,27 @@
       // this.getHistory()
     },
     methods: {
-      // 获取AI问答
-      getAnswer: async function() {
-        const res = await getAnswerAPI();
-        // 处理响应，并存储到dialoguesAns数组中
-        const answer = {
-          answer: res.answer, // 假设响应中有一个字段叫做answer，存储AI的回答
-          id: 1
-        };
-        this.dialoguesAns.push(answer); // 将AI的回答存储到dialoguesAns数组中
+      async getAnswer() {
+        try {
+          this.isSearching = true; // 开始搜索，设置搜索状态为true
+          this.value_ask = '',
+            this.placeHolder = "正在回答..."
+          // 模拟一个长时间的异步操作
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          const res = await getAnswerAPI();
+          // 处理响应，并存储到dialoguesAns数组中
+          const answer = {
+            answer: res.answer, // 假设响应中有一个字段叫做answer，存储AI的回答
+            id: 1
+          };
+          this.dialoguesAns.push(answer); // 将AI的回答存储到dialoguesAns数组中
+        } catch (error) {
+          // 错误处理逻辑...
+        } finally {
+          this.isSearching = false; // 结束搜索，设置搜索状态为false
+          this.placeHolder = "有什么问题尽管问我哦",
+            this.value_ask = ''; // 恢复输入框文字
+        }
       },
       goToHistory() {
         uni.navigateTo({
@@ -77,6 +91,7 @@
         if (!this.value_ask.trim()) {
           return; // 如果为空，直接返回，不执行后续的操作
         }
+        const asking_content = this.value_ask;
         const currentTime = new Date(); // 获取当前时间
         const month = currentTime.getMonth() + 1; // 获取月份
         const day = currentTime.getDate(); // 获取日期
@@ -87,12 +102,11 @@
 
         await this.getAnswer();
         const question = {
-          ask: this.value_ask, // 获取输入框中的内容
+          ask: asking_content, // 获取输入框中的内容
           ask_time: formattedTime, // 存储当前时间
           answer: this.dialoguesAns[0].answer, // 存储AI的回答，若无回答则为空字符串
           id: this.dialoguesAns[0].id // 存储AI的回答的ID，若无回答则为null
         };
-
         // 将对话记录推入 history 数组中
         this.history.push(question);
         this.dialoguesAns = [], // 清空数组
@@ -249,6 +263,16 @@
           /* 占据剩余空间 */
           padding-left: 26rpx;
         }
+        // 输入框提示词字体样式
+        .placeholder-style {
+          font-size: 14px;
+          font-weight: 400;
+          letter-spacing: 0px;
+          line-height: 18.56px;
+          color: rgba(1, 148, 62, 0.51);
+          text-align: left;
+          vertical-align: top;
+        }
 
         // 图片
         .search-icon {
@@ -269,40 +293,3 @@
     }
   }
 </style>
-
-
-<!--     .search-icon {
-       position: absolute; /* 绝对定位 */
-       right: 12rpx; /* 距离右侧 12px */
-       top: 50%; /* 垂直居中 */
-       transform: translateY(-50%); /* 垂直居中 */
-       cursor: pointer; /* 设置鼠标指针为手型 */
-      img{
-        margin-right: 10rpx;
-        margin-bottom: 5rpx;
-        width: 35rpx;
-        height: 30rpx;
-      }
-     } -->
-
-<!--     .input::placeholder {
-       font-size: 14px;
-       font-weight: 400;
-       letter-spacing: 0px;
-       line-height: 18.56px;
-       color: rgba(1, 148, 62, 0.51);
-       text-align: left;
-       vertical-align: top;
-     }   -->
-
-<!--     // 输入框
-     input {
-       height: 76rpx;
-       min-height: 70rpx;
-       flex: 1; /* 占据剩余空间 */
-       padding: 12rpx; /* 内边距 */
-       border-radius: 40rpx; /* 圆角 */
-       outline: none; /* 去除输入框点击时的边框阴影 */
-       background: rgba(60, 199, 118, 0.17);
-       padding-left: 26rpx;
-     } -->
