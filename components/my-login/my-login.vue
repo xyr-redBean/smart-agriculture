@@ -70,7 +70,7 @@
 <style lang="scss">
 page {
 	height: 100%;
-	background: linear-gradient(to bottom, #7ae790, #ffffff);
+	background: linear-gradient(180deg, rgba(15, 255, 79, 0.18) 0.07%, rgba(79, 255, 158, 0) 75.38%);
 }
 .container {
 	height: 100%;

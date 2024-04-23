@@ -9,6 +9,7 @@
 		"style" : 
 		{
 			"navigationBarTitleText" : "耕农千问",
+			"navigationBarBackgroundColor": "#d1fadd",
 			"enablePullDownRefresh" : false
 		}
 	},

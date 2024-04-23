@@ -15,7 +15,8 @@
     <view class="chat-message">
       <view class="message" v-for="(message, index) in messages" :key="message.id">
         <view class="message-wrapper">
-          <view class="additional-box"><span>111</span><span>1</span><span>1</span></view>
+          <view class="additional-box"></view>
+		  <view class="circular"></view>
           <view class="message-box">
             <view class="message-text">{{ message.text }}</view>
             <view class="message-time">{{ message.time }}</view>
@@ -186,22 +187,23 @@
   align-items: center;
   position: relative; /* 添加相对定位 */
   margin-left: 34rpx; /* 调整为与.additional-box的宽度一致 */
-  border-left: 0.96px solid rgba(199, 199, 199, 1);
+  // border-left: 0.96px solid rgba(199, 199, 199, 1);
+  .additional-box{
+	  position: absolute;
+	  left: 17rpx;
+	  height: 200rpx;
+	  width: 3rpx;
+	  background-color: rgba(199, 199, 199, 1);
+  }
+  .circular{
+	  position: absolute;
+	  height: 34rpx;
+	  width: 34rpx;
+	  border-radius: 50%;
+	  background-color: #3ACF78;
+  }
 }
 
-.additional-box {
-  display: flex;
-  flex-direction: column;
-  width: 34rpx;
-  background-image:url("@/static/images/装饰2.png"); /* 使用背景图和线性渐变 */
-  background-repeat: no-repeat; /* 背景图不重复 */
-  background-size: contain; /* 调整背景图像大小以适应元素 */
-  background-position: center; /* 背景图垂直水平居中 */
-  font-size: 0; /* 字体大小为0 */
-  position: absolute; /* 添加绝对定位 */
-  top: 0; /* 与父容器顶部对齐 */
-  bottom: 0; /* 与父容器底部对齐 */
-  height: 100%; /* 充满父容器的高度 */
-}
+
 
 </style>
