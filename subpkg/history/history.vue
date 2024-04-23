@@ -1,11 +1,11 @@
 <!-- 这个页面主要就是时间弹层没弄好，还有个左边那竖着的装饰，没啥想法，弄个循环？ -->
 <template>
   <view class="chat-container" :style="{ paddingTop: distanceFromTop + 'px' }">
-  <!-- 导航栏 -->
+    <!-- 导航栏 -->
     <view class="navigation">
-	  <view class="title">
-		历史对话
-	  </view>
+      <view class="title">
+        历史对话
+      </view>
     </view>
     <view class="chat-header">
       <view class="year-month-selector">
@@ -17,15 +17,15 @@
         <img src="@/static/images/回收站.png" alt="Delete" />
       </view>
     </view>
-    
+    <!-- 还缺少如果没有数据情况，和根据选择日期筛选 -->
     <view class="chat-message">
-      <view class="message" v-for="(message, index) in messages" :key="message.id">
+      <view class="message" v-for="(message, index) in historyTalk" :key="index">
         <view class="message-wrapper">
           <view class="additional-box"></view>
-		  <view class="circular"></view>
+          <view class="circular"></view>
           <view class="message-box">
-            <view class="message-text">{{ message.text }}</view>
-            <view class="message-time">{{ message.time }}</view>
+            <view class="message-text">{{ message.ask }}</view>
+            <view class="message-time">{{ message.ask_time }}</view>
           </view>
         </view>
       </view>
@@ -38,10 +38,16 @@
 </template>
 
 <script>
+  import {
+    getHistoryAPI
+  } from '@/services/history'
   export default {
     data() {
       return {
-		distanceFromTop: 0,
+        selected_year: 2024, // 选择的年份
+        selected_month: 10, // 选择的月份
+        distanceFromTop: 0,
+        historyTalk: [], // 历史聊天信息
         newMessage: '',
         messages: [{
             id: 1,
@@ -73,19 +79,45 @@
         selectedYearMonthIndex: 0, // 默认选中的年月索引
       }
     },
-	onLoad() {
-		// 获取屏幕边界到安全区域的一个距离
-		const sysInfo = uni.getSystemInfoSync()
-		this.distanceFromTop = sysInfo.safeAreaInsets.top
-	},
+    onLoad() {
+      // 获取历史记录
+      this.fetchHistory();
+
+      // 获取屏幕边界到安全区域的一个距离
+      const sysInfo = uni.getSystemInfoSync()
+      this.distanceFromTop = sysInfo.safeAreaInsets.top
+
+      // 设置默认日期为当前日期
+      const currentDate = new Date();
+      this.selected_year = currentDate.getFullYear();
+      this.selected_month = currentDate.getMonth() + 1;
+
+      // 找到默认日期在 yearMonths 数组中的索引
+      const defaultIndex = this.yearMonths.findIndex(month => {
+        const [year, monthStr] = month.split("年");
+        const currentYear = parseInt(year);
+        const currentMonth = parseInt(monthStr.split("月")[0]);
+        return currentYear === this.selected_year && currentMonth === this.selected_month;
+      });
+
+      if (defaultIndex !== -1) {
+        this.selectedYearMonthIndex = defaultIndex;
+      }
+    },
     computed: {
 
     },
     methods: {
+      // 时间选择器
       onChangeYearMonth(event) {
         this.selectedYearMonthIndex = event.mp.detail.value;
         const selectedYearMonth = this.yearMonths[this.selectedYearMonthIndex];
         console.log(`选中的年月: ${selectedYearMonth}`);
+        // 提取年份和月份
+        this.selected_year = selectedYearMonth.split("年")[0];
+        this.selected_month = selectedYearMonth.split("年")[1].split("月")[0];
+        console.log(`选中的年份: ${this.selected_year}`);
+        console.log(`选中的月份: ${this.selected_month}`);
       },
       generateYearMonthArray() {
         const years = Array.from({
@@ -102,21 +134,35 @@
         });
         return yearMonths;
       },
+      // 获取历史信息函数
+      async fetchHistory() {
+        try {
+          // 调用接口获取历史记录数据
+          const response = await getHistoryAPI();
+          // 将数据存储到 historyTalk 中
+          this.historyTalk = response.HISTORY;
+          console.log(this.historyTalk)
+        } catch (error) {
+          console.error('Error fetching history:', error);
+        }
+      },
     }
   }
 </script>
 
 <style lang="scss">
   .chat-container {
-	.navigation{
-	  display: flex;
+    .navigation {
+      display: flex;
       justify-content: center;
-      .title{
-		font-size: 35rpx;
-		line-height: 80rpx;
-		font-weight: 500;
+
+      .title {
+        font-size: 35rpx;
+        line-height: 80rpx;
+        font-weight: 500;
       }
-	}
+    }
+
     left: -7px;
     top: -5.35px;
     width: 782rpx;
@@ -154,7 +200,9 @@
     flex-direction: column;
     align-items: center;
   }
-  .end-message, .empty-message {
+
+  .end-message,
+  .empty-message {
     margin-top: 90px;
     /** 文本1 */
     font-size: 11.54px;
@@ -165,66 +213,73 @@
     text-align: left;
     vertical-align: top;
   }
-.message-box {
-  display: flex;
-  margin-right: 48rpx;
-  margin-left: 50rpx;
-  padding-left: 46rpx;
-  padding-right: 46rpx;
-  flex-direction: column;
-  justify-content: center; /* 垂直居中 */
-  margin-top: 44rpx;
-  height: 120rpx;
-  width: 590rpx;
-  opacity: 1;
-  border-radius: 19rpx;
-  background: rgba(255, 255, 255, 1);
-  
-  .message-text {
-    font-size: 15.38px;
-    font-weight: 500;
-    letter-spacing: 0px;
-    line-height: 20.4px;
-    color: rgba(51, 51, 51, 1);
-    text-align: left;
-    vertical-align: top;
-    white-space: nowrap; /* 文本不换行 */
-    overflow: hidden; /* 超出部分隐藏 */
-    text-overflow: ellipsis; /* 超出部分显示省略号 */
+
+  .message-box {
+    display: flex;
+    margin-right: 48rpx;
+    margin-left: 50rpx;
+    padding-left: 46rpx;
+    padding-right: 46rpx;
+    flex-direction: column;
+    justify-content: center;
+    /* 垂直居中 */
+    margin-top: 44rpx;
+    height: 120rpx;
+    width: 590rpx;
+    opacity: 1;
+    border-radius: 19rpx;
+    background: rgba(255, 255, 255, 1);
+
+    .message-text {
+      font-size: 15.38px;
+      font-weight: 500;
+      letter-spacing: 0px;
+      line-height: 20.4px;
+      color: rgba(51, 51, 51, 1);
+      text-align: left;
+      vertical-align: top;
+      white-space: nowrap;
+      /* 文本不换行 */
+      overflow: hidden;
+      /* 超出部分隐藏 */
+      text-overflow: ellipsis;
+      /* 超出部分显示省略号 */
+    }
+
+    .message-time {
+      font-size: 11.54px;
+      font-weight: 400;
+      letter-spacing: 0px;
+      line-height: 15.3px;
+      color: rgba(153, 153, 153, 1);
+      text-align: left;
+      vertical-align: top;
+    }
   }
 
-  .message-time {
-    font-size: 11.54px;
-    font-weight: 400;
-    letter-spacing: 0px;
-    line-height: 15.3px;
-    color: rgba(153, 153, 153, 1);
-    text-align: left;
-    vertical-align: top;
-  }
-}
-.message-wrapper {
-  display: flex;
-  align-items: center;
-  position: relative; /* 添加相对定位 */
-  margin-left: 34rpx; /* 调整为与.additional-box的宽度一致 */
-  // border-left: 0.96px solid rgba(199, 199, 199, 1);
-  .additional-box{
-	  position: absolute;
-	  left: 17rpx;
-	  height: 200rpx;
-	  width: 3rpx;
-	  background-color: rgba(199, 199, 199, 1);
-  }
-  .circular{
-	  position: absolute;
-	  height: 34rpx;
-	  width: 34rpx;
-	  border-radius: 50%;
-	  background-color: #3ACF78;
-  }
-}
+  .message-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* 添加相对定位 */
+    margin-left: 34rpx;
 
+    /* 调整为与.additional-box的宽度一致 */
+    // border-left: 0.96px solid rgba(199, 199, 199, 1);
+    .additional-box {
+      position: absolute;
+      left: 17rpx;
+      height: 200rpx;
+      width: 3rpx;
+      background-color: rgba(199, 199, 199, 1);
+    }
 
-
+    .circular {
+      position: absolute;
+      height: 34rpx;
+      width: 34rpx;
+      border-radius: 50%;
+      background-color: #3ACF78;
+    }
+  }
 </style>
