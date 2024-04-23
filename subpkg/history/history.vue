@@ -1,6 +1,12 @@
 <!-- 这个页面主要就是时间弹层没弄好，还有个左边那竖着的装饰，没啥想法，弄个循环？ -->
 <template>
-  <view class="chat-container">
+  <view class="chat-container" :style="{ paddingTop: distanceFromTop + 'px' }">
+  <!-- 导航栏 -->
+    <view class="navigation">
+	  <view class="title">
+		历史对话
+	  </view>
+    </view>
     <view class="chat-header">
       <view class="year-month-selector">
         <picker @change="onChangeYearMonth" :value="selectedYearMonthIndex" mode="selector" :range="yearMonths">
@@ -35,6 +41,7 @@
   export default {
     data() {
       return {
+		distanceFromTop: 0,
         newMessage: '',
         messages: [{
             id: 1,
@@ -66,6 +73,11 @@
         selectedYearMonthIndex: 0, // 默认选中的年月索引
       }
     },
+	onLoad() {
+		// 获取屏幕边界到安全区域的一个距离
+		const sysInfo = uni.getSystemInfoSync()
+		this.distanceFromTop = sysInfo.safeAreaInsets.top
+	},
     computed: {
 
     },
@@ -96,6 +108,15 @@
 
 <style lang="scss">
   .chat-container {
+	.navigation{
+	  display: flex;
+      justify-content: center;
+      .title{
+		font-size: 35rpx;
+		line-height: 80rpx;
+		font-weight: 500;
+      }
+	}
     left: -7px;
     top: -5.35px;
     width: 782rpx;

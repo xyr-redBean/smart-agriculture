@@ -41,11 +41,11 @@
 	export default {
 		data() {
 			return {
-        value: '', // 绑定输入框的值
+				value: '', // 绑定输入框的值
 				history: [],
 				keyword: '',
 				distanceFromTop: 0,
-        dialogues:[],// 聊天内容
+				dialogues:[],// 聊天内容
 			};
 		},
 		onLoad(options) {

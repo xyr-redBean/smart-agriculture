@@ -8,8 +8,7 @@
 		"path" : "pages/my/my",
 		"style" : 
 		{
-			"navigationBarTitleText" : "耕农千问",
-			"navigationBarBackgroundColor": "#d1fadd",
+			"navigationStyle": "custom",
 			"enablePullDownRefresh" : false
 		}
 	},
@@ -40,14 +39,22 @@
 	"subPackages": [{
 		"root": "subpkg",
 		"pages": [{
-			  "path" : "history/history",
-			  "style" : 
-			  {
-				"navigationBarTitleText" : "历史对话",
-				"navigationBarBackgroundColor": "#d1fadd",
-				"enablePullDownRefresh" : false
-			  }
-		}]
+				  "path" : "history/history",
+				  "style" : 
+				  {
+					"navigationStyle": "custom",
+					"enablePullDownRefresh" : false
+				  }
+			},
+			{
+				  "path" : "search/search",
+				  "style" : 
+				  {
+					"navigationBarTitleText" : "",
+					"enablePullDownRefresh" : false
+				  }
+			}
+		]
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -59,25 +66,34 @@
 		}
 	},
 	"tabBar": {
-		"selectedColor": "#C00000",
-    // 因为我好像不知道如何从原稿中弄下图标来，就先到网上找了类似的
+		"color": "#C4C4C4",
+		"selectedColor": "#333",
+		"iconfontSrc":"static/iconfont.ttf",
 		"list": [{
 				"pagePath": "pages/home/home",
 				"text": "首页",
-        "iconPath": "static/images/首页.png",
-        "selectedIconPath": "static/images/首页_selected.png"
+				"iconPath": "static/images/首页.png",
+				"selectedIconPath": "static/images/首页_selected.png",
+				// 不生效，根本不生效...
+				"iconfont": { // 优先级高于 iconPath，该属性依赖 tabbar 根节点的 iconfontSrc
+					"text": "\ue604",
+					"selectedText": "\ue604",
+					"fontSize": "17px",
+					"color": "#C4C4C4",
+					"selectedColor": "#333"
+				}
 			},
 			{
 				"pagePath": "pages/expert/expert",
 				"text": "专家",
-        "iconPath": "static/images/专家.png",
-        "selectedIconPath": "static/images/专家_selected.png"
+				"iconPath": "static/images/专家.png",
+				"selectedIconPath": "static/images/专家_selected.png"
 			},
 			{
 				"pagePath": "pages/my/my",
 				"text": "我的",
-        "iconPath": "static/images/个人.png",
-        "selectedIconPath": "static/images/个人_selected.png"
+				"iconPath": "static/images/个人.png",
+				"selectedIconPath": "static/images/个人_selected.png"
 			}
 		]
 	}
