@@ -4,7 +4,9 @@
 	    <view class="top">
 	      <img src="@/static/images/logo.png">
 	      <p>耕农千问</p>
-		  <u-search placeholder="查询专家" v-model="keyword" height="60" bgColor="#DFDFDF" :showAction="flase"></u-search>
+		 <view style="width: 240rpx" @click="gotoSearch">
+		 	 <u-search placeholder="查询专家" v-model="keyword" height="60" bgColor="#DFDFDF" :showAction="flase"></u-search>
+		 </view>
 	    </view>
 
 		<!-- 轮播图 -->
@@ -98,6 +100,15 @@
 			// 获取屏幕边界到安全区域的一个距离
 			const sysInfo = uni.getSystemInfoSync()
 			this.distanceFromTop = sysInfo.safeAreaInsets.top
+		},
+		methods: {
+			// 跳转到搜索页
+			gotoSearch() {
+				console.log(111)
+				uni.navigateTo({
+					url: '/subpkg/search/search'
+				})
+			}
 		}
 	}
 </script>
@@ -108,7 +119,6 @@
   height: 74rpx;
   text-align: center;
   align-items: center;
-  margin-right: 200rpx;
   
   img {
 	height: 52rpx;

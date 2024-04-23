@@ -50,7 +50,7 @@
 				  "path" : "search/search",
 				  "style" : 
 				  {
-					"navigationBarTitleText" : "",
+					"navigationBarTitleText" : "耕农千问",
 					"enablePullDownRefresh" : false
 				  }
 			}

@@ -1,11 +1,11 @@
 <template>
-	<view>
+	<view class="viewport" :style="{ paddingTop: distanceFromTop + 'px' }">
 		<view class="search-box">
-			<uni-search-bar @input="input" :radius="100" cancelButton="none"></uni-search-bar>
+			<uni-search-bar @input="input" :radius="100" cancelButton="none" bgColor="#DFDFDF"></uni-search-bar>
 		</view>
 	
 		<!-- 搜索建议列表 -->
-		<view class="sugg-list" v-if="searchResults.length !== 0">
+		<view class="sugg-list"  v-if="searchResults.length !== 0">
 			<view class="sugg-item" v-for="(item, i) in searchResults" :key="i">
 				<view class="experts-name">王博士</view>
 				<uni-icons type="arrowright" size="16"></uni-icons>
@@ -37,14 +37,14 @@
 				// 搜索的结果列表
 				searchResults: [],
 				// 搜索历史的数组
-				historyList: []
+				historyList: ["王博士", "张教授"]
 			};
 		},
 		onLoad() {
 			// 获取屏幕边界到安全区域的一个距离
 			const sysInfo = uni.getSystemInfoSync()
 			this.distanceFromTop = sysInfo.safeAreaInsets.top
-			this.historyList = JSON.parse(uni.getStorageSync('kw') || '[]')
+			// this.historyList = JSON.parse(uni.getStorageSync('kw') || '[]')
 		},
 		methods: {
 			// input 输入事件的处理函数
@@ -93,55 +93,52 @@
 </script>
 
 <style lang="scss">
-	.page{
-		background-color: black;
-	}
-	.search-box {
-		position: sticky;
-		top: 0;
-		z-index: 999;
-	}
+.search-box {
+	position: sticky;
+	top: 0;
+	z-index: 999;
+}
 
-	.sugg-list {
-		padding: 0 5px;
+.sugg-list {
+	padding: 0 5px;
 
-		.sugg-item {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			font-size: 12px;
-			padding: 13px 0;
-			border-bottom: 1px solid #efefef;
+	.sugg-item {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 12px;
+		padding: 13px 0;
+		border-bottom: 1px solid #efefef;
 
-			.goods-name {
-				white-space: nowrap;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				margin-right: 3px;
-			}
+		.goods-name {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			margin-right: 3px;
 		}
 	}
+}
 
-	.history-box {
-		padding: 0 5px;
+.history-box {
+	padding: 0 5px;
 
-		.history-title {
-			display: flex;
-			justify-content: space-between;
-			height: 40px;
-			align-items: center;
-			font-size: 13px;
-			border-bottom: 1px solid #efefef;
-		}
+	.history-title {
+		display: flex;
+		justify-content: space-between;
+		height: 40px;
+		align-items: center;
+		font-size: 13px;
+		border-bottom: 1px solid #efefef;
+	}
 
-		.history-list {
-			display: flex;
-			flex-wrap: wrap;
+	.history-list {
+		display: flex;
+		flex-wrap: wrap;
 
-			.uni-tag {
-				margin-top: 5px;
-				margin-right: 5px;
-			}
+		.uni-tag {
+			margin-top: 5px;
+			margin-right: 5px;
 		}
 	}
+}
 </style>
