@@ -1,16 +1,10 @@
 <template>
 	<view class="container">
-		<!-- 导航栏 -->
-		<view class="navigation">
-			<view class="title">
-				耕农千问
-			</view>
-		</view>
 		<!-- 头像昵称区域 -->
 		<view class="personalInfo">
-			<image src="@/static/images/default-avatar.jpg" class="avatar" />
+			<image src="@/static/images/头像.png" class="avatar" />
 			<view class="container2">
-			  <view class="tag">点击登录</view>
+			  <view class="tag" @click="gotoLogin">点击登录</view>
 			</view>
 	    </view>
 		<!-- 面板区域 -->
@@ -36,12 +30,12 @@
 		
 				<!-- 第2个面板 -->
 				<view class="panel">
-					<view class="panel-list-item" v-for="(item, index) in panelList2" :key="item.id">
-						<view class="ahead">
-							<uni-icons custom-prefix="iconfont" :type="item.icon" size="21" color="#3ACF78" style="margin-right: 25rpx;"></uni-icons>
-							<text>{{ item.type }}</text>
+					<view class="panel-list-item" v-for="(item, index) in panelList2" :key="item.id" @click="pageJump(item)">
+						<image :src="`/static/images/${item.icon}.png`" class="icon">
+						<text>{{ item.type }}</text>
+						<view class="arrow">
+							<uni-icons type="arrowright" size="15"></uni-icons>
 						</view>
-						<uni-icons type="arrowright" size="15"></uni-icons>
 					</view>
 				</view>
 			</view>
@@ -62,9 +56,28 @@
 					{id: 4, icon: "headphones", type: "退款/售后"}
 				],
 				panelList2: [
-					{id: 1, icon: "icon-jungongguanli", type: "设置"},
-					{id: 2, icon: "icon-questionprompt", type: "常见问题"}
+					{id: 1, icon: "设置", type: "设置"},
+					{id: 2, icon: "帮助", type: "常见问题"}
 				]
+			}
+		},
+		methods: {
+			gotoLogin(){
+				uni.navigateTo({
+				  url: '/pages/login/login'
+				});
+			},
+			// 第二面板页面跳转
+			pageJump(item){
+				if (item.type === "设置") {
+				    uni.navigateTo({
+				      url: "/subpkg/settings/settings"
+				    });
+				} else if (item.type === "常见问题") {
+				    uni.navigateTo({
+				      url: "/subpkg/questions/questions"
+				    });
+				}
 			}
 		},
 	}
@@ -73,19 +86,9 @@
 <style lang="scss">
 page {
 	height: 100%;
-	background: linear-gradient(180deg, rgba(15, 255, 79, 0.18) 0.07%, rgba(79, 255, 158, 0) 75.38%);
+	background: linear-gradient(180deg, rgba(1, 232, 21, 0.2) 0.07%, rgba(79, 255, 158, 0) 55.38%);
 }
 .container {
-	height: 100%;
-	.navigation{
-		display: flex;
-		justify-content: center;
-		.title{
-			font-size: 35rpx;
-			line-height: 80rpx;
-			font-weight: 500;
-		}
-	}
 	.personalInfo {
 		display: flex;
 		height: 200rpx;
@@ -151,12 +154,22 @@ page {
 	}
 	
 	.panel-list-item {
+		position: relative;
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
 		font-size: 30rpx;
 		padding: 0 20rpx;
 		line-height: 90rpx;
+		border-bottom: 2rpx solid #F4F4F4;
+		.icon{
+			width: 44rpx;
+			height: 44rpx;
+			margin-right: 25rpx;
+		}
+		.arrow{
+			position: absolute;
+			right: 8rpx;
+		}
 	}
 }
 </style>
