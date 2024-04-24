@@ -1,4 +1,3 @@
-<!-- 这个页面主要就是时间弹层没弄好，还有个左边那竖着的装饰，没啥想法，弄个循环？ -->
 <template>
   <view class="chat-container" :style="{ paddingTop: distanceFromTop + 'px' }">
     <!-- 导航栏 -->
@@ -17,7 +16,6 @@
         <img src="@/static/images/回收站.png" alt="Delete" />
       </view>
     </view>
-    <!-- 还缺少如果没有数据情况，和根据选择日期筛选 -->
     <view class="chat-message">
       <view class="message" v-for="(message, index) in selected_history" :key="index">
         <view class="message-wrapper">
@@ -29,9 +27,12 @@
           </view>
         </view>
       </view>
-      <view class="end-message" v-if="selected_history.length > 0">已经到底了</view>
-      <view class="empty-message" v-if="selected_history.length === 0">
-        <text>暂时还没有记录</text>
+      <view class="end">
+        <view class="end-message" v-if="selected_history.length > 0">已经到底了</view>
+        <view class="empty-message" v-if="selected_history.length === 0">
+          <text>暂时还没有记录</text>
+        </view>
+        <view class="ToAddPage" @click="ToAdd"></view>
       </view>
     </view>
   </view>
@@ -159,6 +160,11 @@
           console.error('Error fetching history:', error);
         }
       },
+      // 增添问答
+      ToAdd(){
+        console.log(1)
+        this.$router.push('/pages/home/home');
+      }
     }
   }
 </script>
@@ -214,6 +220,17 @@
     align-items: center;
   }
 
+  .end {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 水平居中 */
+    justify-content: center;
+    /* 垂直居中 */
+  }
+
   .end-message,
   .empty-message {
     margin-top: 90px;
@@ -225,6 +242,23 @@
     color: rgba(153, 153, 153, 1);
     text-align: left;
     vertical-align: top;
+  }
+
+  // 跳转（新增问答）
+  .ToAddPage {
+    position: absolute;
+    /* 设置绝对定位 */
+    top: calc(100% + 150rpx);
+    right: 100rpx;
+    /* 靠右排列 */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-image: url("@/static/images/add.png");
+    background-size: contain;
+    /* 自适应大小 */
+    background-repeat: no-repeat;
+    /* 不重复 */
   }
 
   .message-box {
