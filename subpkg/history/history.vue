@@ -13,13 +13,13 @@
           <view class="picker-item">{{ yearMonths[selectedYearMonthIndex] }}</view>
         </picker>
       </view>
-      <view class="delete">
+      <view @click="confirmDelete" class="delete">
         <img src="@/static/images/回收站.png" alt="Delete" />
       </view>
     </view>
     <!-- 还缺少如果没有数据情况，和根据选择日期筛选 -->
     <view class="chat-message">
-      <view class="message" v-for="(message, index) in historyTalk" :key="index">
+      <view class="message" v-for="(message, index) in selected_history" :key="index">
         <view class="message-wrapper">
           <view class="additional-box"></view>
           <view class="circular"></view>
@@ -29,8 +29,8 @@
           </view>
         </view>
       </view>
-      <view class="end-message" v-if="messages.length > 0">已经到底了</view>
-      <view class="empty-message" v-if="messages.length === 0">
+      <view class="end-message" v-if="selected_history.length > 0">已经到底了</view>
+      <view class="empty-message" v-if="selected_history.length === 0">
         <text>暂时还没有记录</text>
       </view>
     </view>
@@ -45,36 +45,11 @@
     data() {
       return {
         selected_year: 2024, // 选择的年份
-        selected_month: 10, // 选择的月份
+        selected_month: 4, // 选择的月份
         distanceFromTop: 0,
         historyTalk: [], // 历史聊天信息
+        selected_history: [], // 对应日期的历史聊天记录
         newMessage: '',
-        messages: [{
-            id: 1,
-            text: "为什么现在一年四季的天气这么奇怪？",
-            time: "2023年7月11日 21:09"
-          },
-          {
-            id: 2,
-            text: "为什么现在一年四季的天气这么aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa奇怪？",
-            time: "2023年7月10日 10:08"
-          },
-          {
-            id: 3,
-            text: "为什么现在一年四季的天气这么奇怪？",
-            time: "2023年7月8日 21:09"
-          },
-          {
-            id: 4,
-            text: "为什么现在一年四季的天气这么奇怪？",
-            time: "2023年7月3日 13:25"
-          },
-          {
-            id: 5,
-            text: "为什么现在一年四季的天气这么奇怪？",
-            time: "2023年7月1日 09:08"
-          }
-        ],
         yearMonths: this.generateYearMonthArray(), // 年月组合数组
         selectedYearMonthIndex: 0, // 默认选中的年月索引
       }
@@ -108,6 +83,40 @@
 
     },
     methods: {
+      // 弹出确认删除弹窗
+      confirmDelete() {
+        uni.showModal({
+          title: '确认删除',
+          content: '确定要删除选定的历史记录吗？',
+          success: (res) => {
+            if (res.confirm) {
+              // 用户点击确定删除
+              this.clearSelectedHistory();
+            }
+          }
+        });
+      },
+      // 清空选定的历史记录
+      clearSelectedHistory() {
+        // 清空selected_history
+        this.selected_history = [];
+        // 清空historyTalk中对应日期的数据
+        const selectedYearMonthString =
+          `${this.selected_year}-${this.selected_month < 10 ? '0' + this.selected_month : this.selected_month}`;
+        this.historyTalk = this.historyTalk.filter(item => {
+          const itemYearMonth = item.ask_time.substring(0, 7); // 提取历史记录中的年份和月份
+          return itemYearMonth !== selectedYearMonthString;
+        });
+      },
+      // 筛选历史记录
+      filterSleHistory() {
+        const selectedYearMonthString =
+          `${this.selected_year}-${this.selected_month < 10 ? '0' + this.selected_month : this.selected_month}`;
+        this.selected_history = this.historyTalk.filter(item => {
+          const itemYearMonth = item.ask_time.substring(0, 7); // 提取历史记录中的年份和月份
+          return itemYearMonth === selectedYearMonthString;
+        });
+      },
       // 时间选择器
       onChangeYearMonth(event) {
         this.selectedYearMonthIndex = event.mp.detail.value;
@@ -118,6 +127,8 @@
         this.selected_month = selectedYearMonth.split("年")[1].split("月")[0];
         console.log(`选中的年份: ${this.selected_year}`);
         console.log(`选中的月份: ${this.selected_month}`);
+        // 根据选择的年份和月份筛选历史记录
+        this.filterSleHistory();
       },
       generateYearMonthArray() {
         const years = Array.from({
@@ -142,6 +153,8 @@
           // 将数据存储到 historyTalk 中
           this.historyTalk = response.HISTORY;
           console.log(this.historyTalk)
+          // 数据获取完成后再调用筛选方法
+          this.filterSleHistory();
         } catch (error) {
           console.error('Error fetching history:', error);
         }
