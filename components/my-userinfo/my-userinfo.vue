@@ -38,8 +38,8 @@
 		
 				<!-- 第2个面板 -->
 				<view class="panel">
-					<view class="panel-list-item" v-for="(item, index) in panelList2" :key="item.id">
-						<image :src="`/static/images/${item.icon}`" class="icon">
+					<view class="panel-list-item" v-for="(item, index) in panelList2" :key="item.id" @click="pageJump(item)">
+						<image :src="`/static/images/${item.icon}.png`" class="icon">
 						<text>{{ item.type }}</text>
 						<view class="arrow">
 							<uni-icons type="arrowright" size="15"></uni-icons>
@@ -63,15 +63,34 @@
 					{id: 4, icon: "headphones", type: "退款/售后"}
 				],
 				panelList2: [
-					{id: 1, icon: "时间.png", type: "AI问答历史记录"},
-					{id: 2, icon: "星星.png", type: "我的收藏"},
-					{id: 3, icon: "设置.png", type: "设置"},
-					{id: 4, icon: "帮助.png", type: "常见问题"}
+					{id: 1, icon: "时间", type: "AI问答历史记录"},
+					{id: 2, icon: "星星", type: "我的收藏"},
+					{id: 3, icon: "设置", type: "设置"},
+					{id: 4, icon: "帮助", type: "常见问题"}
 				]
 			};
 		},
 		methods: {
-			
+			// 第二面板页面跳转
+			pageJump(item){
+				if (item.type === "AI问答历史记录") {
+				    uni.navigateTo({
+				      url: "/subpkg/history/history"
+				    });
+				} else if (item.type === "我的收藏") {
+				    uni.navigateTo({
+				      url: "/subpkg/collections/collections"
+				    });
+				} else if (item.type === "设置") {
+				    uni.navigateTo({
+				      url: "/subpkg/settings/settings"
+				    });
+				} else if (item.type === "常见问题") {
+				    uni.navigateTo({
+				      url: "/subpkg/questions/questions"
+				    });
+				}
+			}
 		}
 	}
 </script>
@@ -165,6 +184,7 @@ page {
 		font-size: 30rpx;
 		padding: 0 20rpx;
 		line-height: 90rpx;
+		border-bottom: 2rpx solid #F4F4F4;
 		.icon{
 			width: 44rpx;
 			height: 44rpx;

@@ -34,6 +34,7 @@
 		"style" : 
 		{
 			"navigationBarTitleText" : "",
+			"navigationBarBackgroundColor": "#ffffff",
 			"enablePullDownRefresh" : false
 		}
 	}],
@@ -58,6 +59,30 @@
 			},
 			{
 				"path" : "experts_details/experts_details",
+				"style" : 
+				{
+					"navigationBarTitleText" : "",
+					"enablePullDownRefresh" : false
+				}
+			},
+			{
+				"path" : "settings/settings",
+				"style" : 
+				{
+					"navigationBarTitleText" : "",
+					"enablePullDownRefresh" : false
+				}
+			},
+			{
+				"path" : "collections/collections",
+				"style" : 
+				{
+					"navigationBarTitleText" : "",
+					"enablePullDownRefresh" : false
+				}
+			},
+			{
+				"path" : "questions/questions",
 				"style" : 
 				{
 					"navigationBarTitleText" : "",
