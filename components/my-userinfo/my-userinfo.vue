@@ -54,6 +54,12 @@
 <script>
 	export default {
 		name:"my-userinfo",
+		props: {
+			dataProp: {
+			    type: Object,
+			    default: null,
+			}
+		},
 		data() {
 			return {
 				panelList1: [

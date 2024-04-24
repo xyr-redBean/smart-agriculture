@@ -4,7 +4,8 @@ export default {
 
 	// 数据
 	state: () => ({
-		token: uni.getStorageSync('token') || '',
+		// token: uni.getStorageSync('token') || '',
+		token: 123456,
 		// 用户的信息对象
 		userinfo: JSON.parse(uni.getStorageSync('userinfo') || '{}'),
 	}),

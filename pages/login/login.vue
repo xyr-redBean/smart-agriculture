@@ -106,8 +106,8 @@
 			gotoHome() {
 			    console.log(123)
 				// why?跳转不了
-				uni.navigateTo({
-				  url: '/pages/home/home'
+				uni.switchTab({ // 针对tabBar页面跳转
+				  url: '/pages/my/my'
 				});
 			},
 		}
