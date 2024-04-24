@@ -20,7 +20,7 @@
         <view class="ButtonLeft" @click="goToHistory">
           <u-icon class="clock" name="clock" color='green'></u-icon>
         </view>
-        <view class="ButtonMiddle">
+        <view class="ButtonMiddle" @click="addPage">
           <u-icon class="circle" name="plus-circle-fill" color='green'></u-icon>
         </view>
         <view class="search" style="margin-left: 15rpx;margin-right: 0;">
@@ -80,10 +80,16 @@
             this.value_ask = ''; // 恢复输入框文字
         }
       },
+      // 跳转到历史记录
       goToHistory() {
         uni.navigateTo({
           url: '/subpkg/history/history'
         });
+      },
+      // 加新问答
+      addPage(){
+        // 向后台传数据（暂时没写）
+        this.history = []
       },
       // 发送消息
       async onClick() {
