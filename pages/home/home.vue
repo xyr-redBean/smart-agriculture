@@ -62,7 +62,7 @@
         try {
           this.isSearching = true; // 开始搜索，设置搜索状态为true
           this.value_ask = '',
-            this.placeHolder = "正在回答..."
+          this.placeHolder = "正在回答..."
           // 模拟一个长时间的异步操作
           await new Promise(resolve => setTimeout(resolve, 1000));
           const res = await getAnswerAPI();

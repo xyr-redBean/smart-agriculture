@@ -4,13 +4,13 @@
 			<image src="https://img.js.design/assets/smartFill/img328164da748e08.jpeg" class="avatar" />
 			<view class="profile">
 				<view class="upper">
-					<view class="name">李博士</view>
+					<view class="name">{{ dataProp.name }}</view>
 					<view class="speciality">土壤管理</view>
 				</view>
 				<view class="university">中国农业大学</view>
 				
 			</view>
-			<view class="button">立即咨询</view>
+			<view class="button" @click="handleButtonClick">立即咨询</view>
 		</view>
 		<view class="bottom">
 			<view class="advantage">
@@ -23,10 +23,23 @@
 <script>
 	export default {
 		name:"expert-category",
+		props: {
+			dataProp: {
+			    type: Object,
+			    default: null,
+			}
+		},
 		data() {
 			return {
 				
 			};
+		},
+		methods: {
+		    handleButtonClick() {
+		      const pagePath = '/subpkg/experts_details/experts_details' 
+		      const extraParams = { param1: 'value1', param2: 'value2' } // 额外的参数
+		      this.$emit('navigate', { pagePath, extraParams }) // 触发自定义事件，并传递页面路径和额外参数
+		    }
 		}
 	}
 </script>

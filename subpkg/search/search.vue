@@ -1,12 +1,13 @@
 <template>
-	<view class="viewport" :style="{ paddingTop: distanceFromTop + 'px' }">
+	<view class="viewport" style="margin: 0 20rpx;">
+		<!-- 搜素框 -->
 		<view class="search-box">
 			<uni-search-bar @input="input" :radius="100" cancelButton="none" bgColor="#DFDFDF"></uni-search-bar>
 		</view>
 	
 		<!-- 搜索建议列表 -->
 		<view class="sugg-list"  v-if="searchResults.length !== 0">
-			<view class="sugg-item" v-for="(item, i) in searchResults" :key="i">
+			<view class="sugg-item" v-for="(item, i) in searchResults" :key="i" @click="gotoDetail(item)">
 				<view class="experts-name">王博士</view>
 				<uni-icons type="arrowright" size="16"></uni-icons>
 			</view>
@@ -21,7 +22,7 @@
 			</view>
 			<!-- 列表区域 -->
 			<view class="history-list">
-				<uni-tag :text="item" v-for="(item, i) in histories" :key="i"></uni-tag>
+				<uni-tag :text="item" v-for="(item, i) in histories" :key="i" @click="gotoDetail(item)"></uni-tag>
 			</view>
 		</view>
 	</view>
@@ -78,6 +79,12 @@
 				// 对搜索历史数据，进行持久化的存储
 				uni.setStorageSync('kw', JSON.stringify(this.historyList))
 			},
+			// 去专家详情页
+			gotoDetail(item) {
+				uni.navigateTo({
+					url: '/subpkg/experts_details/experts_details?experts_id=' + item.experts_id
+				})
+			},
 			// 清空历史记录
 			clean() {
 				this.historyList = []
@@ -100,35 +107,35 @@
 }
 
 .sugg-list {
-	padding: 0 5px;
+	padding: 0 10rpx;
 
 	.sugg-item {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		font-size: 12px;
-		padding: 13px 0;
-		border-bottom: 1px solid #efefef;
+		font-size: 24rpx;
+		padding: 26rpx 0;
+		border-bottom: 2rpx solid #efefef;
 
-		.goods-name {
+		.experts-name {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			margin-right: 3px;
+			margin-right: 6rpx;
 		}
 	}
 }
 
 .history-box {
-	padding: 0 5px;
+	padding: 0 10rpx;
 
 	.history-title {
 		display: flex;
 		justify-content: space-between;
-		height: 40px;
+		height: 80rpx;
 		align-items: center;
-		font-size: 13px;
-		border-bottom: 1px solid #efefef;
+		font-size: 26rpx;
+		border-bottom: 2rpx solid #efefef;
 	}
 
 	.history-list {
@@ -136,8 +143,8 @@
 		flex-wrap: wrap;
 
 		.uni-tag {
-			margin-top: 5px;
-			margin-right: 5px;
+			margin-top: 10rpx;
+			margin-right: 10rpx;
 		}
 	}
 }

@@ -1,11 +1,5 @@
 <template>
 	<view class="container">
-		<!-- 导航栏 -->
-		<view class="navigation">
-			<view class="title">
-				耕农千问
-			</view>
-		</view>
 		<!-- 头像昵称区域 -->
 		<view class="personalInfo">
 			<image src="https://img.js.design/assets/smartFill/img328164da748e08.jpeg" class="avatar" />
@@ -89,15 +83,6 @@ page {
 }
 .container {
 	height: 100%;
-	.navigation{
-		display: flex;
-		justify-content: center;
-		.title{
-			font-size: 35rpx;
-			line-height: 80rpx;
-			font-weight: 500;
-		}
-	}
 	.personalInfo {
 		display: flex;
 		height: 200rpx;

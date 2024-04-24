@@ -1,12 +1,6 @@
 <!-- 这个页面主要就是时间弹层没弄好，还有个左边那竖着的装饰，没啥想法，弄个循环？ -->
 <template>
-  <view class="chat-container" :style="{ paddingTop: distanceFromTop + 'px' }">
-  <!-- 导航栏 -->
-    <view class="navigation">
-	  <view class="title">
-		历史对话
-	  </view>
-    </view>
+  <view class="chat-container">
     <view class="chat-header">
       <view class="year-month-selector">
         <picker @change="onChangeYearMonth" :value="selectedYearMonthIndex" mode="selector" :range="yearMonths">
@@ -108,20 +102,11 @@
 
 <style lang="scss">
   .chat-container {
-	.navigation{
-	  display: flex;
-      justify-content: center;
-      .title{
-		font-size: 35rpx;
-		line-height: 80rpx;
-		font-weight: 500;
-      }
-	}
-    left: -7px;
-    top: -5.35px;
+    left: -14rpx;
+    top: -10.7rpx;
     width: 782rpx;
     opacity: 1;
-    background: linear-gradient(180deg, rgba(15, 255, 79, 0.18) 0.07%, rgba(79, 255, 158, 0) 75.38%);
+    background: linear-gradient(180deg, rgba(1, 232, 21, 0.2) 0.07%, rgba(79, 255, 158, 0) 55.38%);
   }
 
   .chat-header {

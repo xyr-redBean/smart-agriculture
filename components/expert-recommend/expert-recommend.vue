@@ -2,23 +2,37 @@
 	<view class="container2">
 		<view class="top2">
 			<image src="https://img.js.design/assets/smartFill/img328164da748e08.jpeg" class="avatar2" />
-			<view class="name2">王博士</view>
+			<view class="name2">{{ dataProp.name }}</view>
 		</view>
 		<view class="center">
 			<view class="university2">陕西农业大学</view>
 			<view class="introduction">简介：著名灌溉专家</view>
 		</view>
-		<view class="button2">立即咨询</view>
-	</view>
+		<view class="button2" @click="handleButtonClick">立即咨询</view>
+	</view>		
 </template>
 
 <script>
+	
 	export default {
 		name:"expert-recommend",
+		props: {
+			dataProp: {
+			    type: Object,
+			    default: null,
+			}
+		},
 		data() {
 			return {
 				
 			};
+		},
+		methods: {
+		    handleButtonClick() {
+		      const pagePath = '/subpkg/experts_details/experts_details' 
+		      const extraParams = { param1: 'value1', param2: 'value2' } // 额外的参数
+		      this.$emit('navigate', { pagePath, extraParams }) // 触发自定义事件，并传递页面路径和额外参数
+		    }
 		}
 	}
 </script>

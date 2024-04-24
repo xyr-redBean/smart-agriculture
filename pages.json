@@ -8,7 +8,8 @@
 		"path" : "pages/my/my",
 		"style" : 
 		{
-			"navigationStyle": "custom",
+			"navigationBarTitleText": "耕农千问",
+			"navigationBarBackgroundColor": "#CCFAD0",
 			"enablePullDownRefresh" : false
 		}
 	},
@@ -42,7 +43,8 @@
 				  "path" : "history/history",
 				  "style" : 
 				  {
-					"navigationStyle": "custom",
+					"navigationBarTitleText": "耕农千问",
+					"navigationBarBackgroundColor": "#CCFAD0",
 					"enablePullDownRefresh" : false
 				  }
 			},
@@ -50,9 +52,17 @@
 				  "path" : "search/search",
 				  "style" : 
 				  {
-					"navigationBarTitleText" : "耕农千问",
+					"navigationBarTitleText" : "搜一搜",
 					"enablePullDownRefresh" : false
 				  }
+			},
+			{
+				"path" : "experts_details/experts_details",
+				"style" : 
+				{
+					"navigationBarTitleText" : "",
+					"enablePullDownRefresh" : false
+				}
 			}
 		]
 	}],

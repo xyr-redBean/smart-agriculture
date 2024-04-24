@@ -5,7 +5,7 @@
 	      <img src="@/static/images/logo.png">
 	      <p>耕农千问</p>
 		 <view style="width: 240rpx" @click="gotoSearch">
-		 	 <u-search placeholder="查询专家" v-model="keyword" height="60" bgColor="#DFDFDF" :showAction="flase"></u-search>
+		 	 <u-search placeholder="查询专家" height="60" bgColor="#DFDFDF" :showAction="flase" :disabled="true"></u-search>
 		 </view>
 	    </view>
 
@@ -34,8 +34,10 @@
 			  scroll-x
 			  class="scroll-view-x"
 			>
-			  <view class="experts-list">
-				<expert-recommend></expert-recommend>
+			  <view style="display: flex;">
+			  	<view class="experts-list" v-for="(item, index) in expertsRecommend" :key="item.id">
+			  		<expert-recommend :dataProp="item" @navigate="handleNavigate"></expert-recommend>
+			  	</view>
 			  </view>
 			</scroll-view>
 		</view>
@@ -61,8 +63,8 @@
 			  scroll-y
 			  class="scroll-view-y"
 			>
-			  <view class="experts">
-				<expert-category></expert-category>
+			  <view class="experts" v-for="item in expertsCategory" :key="item.id">
+				<expert-category :dataProp="item" @navigate="handleNavigate"></expert-category>
 			  </view>
 			  <view class="loading-text">
 				{{ item.finish ? '没有更多数据了~' : '正在加载...' }}
@@ -78,28 +80,35 @@
 		data() {
 			return {
 				distanceFromTop: 0,
-				keyword: '',
 				// 轮播图图片
 				list1: [
 					'https://cdn.uviewui.com/uview/swiper/swiper1.png',
 					'https://cdn.uviewui.com/uview/swiper/swiper2.png',
 					'https://cdn.uviewui.com/uview/swiper/swiper3.png',
 				],
+				// 专家推荐数据
+				expertsRecommend: [{id: 1, name: "王博士"}, {id: 2, name: "张教授"}, {id: 3, name: "李教授"}],
 				// 热门问题分类
 				subTypes: [
-				  { type: '1', title: '热门门类' },
-				  { type: '2', title: '作物种植' },
-				  { type: '3', title: '土壤管理' },
-				  { type: '4', title: '农业机械' },
+				  { type: '1', title: '热门门类', url: '' },//url为后端接口地址
+				  { type: '2', title: '作物种植', url: '' },
+				  { type: '3', title: '土壤管理', url: '' },
+				  { type: '4', title: '农业机械', url: '' },
 				],
 				// 高亮的下标
-				activeIndex: 0
+				activeIndex: 0,
+				// 专家分类列表数据
+				expertsCategory: [{id: 1, name: "王博士"}, {id: 2, name: "张教授"}, {id: 3, name: "李教授"}]
 			};
 		},
 		onLoad(options) {
 			// 获取屏幕边界到安全区域的一个距离
 			const sysInfo = uni.getSystemInfoSync()
 			this.distanceFromTop = sysInfo.safeAreaInsets.top
+			// 获取专家推荐数据
+			this.getExpertsRecommendData()
+			// 获取专家分类列表数据
+			this.getExpertscategoryData()
 		},
 		methods: {
 			// 跳转到搜索页
@@ -108,6 +117,20 @@
 				uni.navigateTo({
 					url: '/subpkg/search/search'
 				})
+			},
+			// 跳转到专家详情页
+			handleNavigate({ pagePath, extraParams }) {
+			    const query = Object.entries(extraParams).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join('&') // 构造查询参数字符串
+			    const url = `${pagePath}?${query}` // 拼接带有额外参数的 URL
+			    uni.navigateTo({ url }) // 使用uniapp的导航 API 进行页面跳转
+			},
+			// 获取专家推荐数据
+			getExpertsRecommendData(){
+				// 发送请求
+			},		 
+			// 获取专家分类列表数据
+			getExpertscategoryData(){
+				// 发送请求，携带subTypes数组元组中的 url参数
 			}
 		}
 	}
@@ -119,6 +142,7 @@
   height: 74rpx;
   text-align: center;
   align-items: center;
+  margin-top: 5rpx;
   
   img {
 	height: 52rpx;
@@ -140,7 +164,7 @@
 	.tabs {
 	  display: flex;
 	  justify-content: space-evenly;
-	  height: 100rpx;
+	  height: 110rpx;
 	  line-height: 90rpx;
 	  font-size: 30rpx;
 	  color: rgba(140, 140, 140, 1);
@@ -161,7 +185,7 @@
 	      background-color: rgba(58,207,120,0.96);
 	      position: absolute;
 	      left: 50%;
-	      bottom: 24rpx;
+	      bottom: 30rpx;
 	    }
 	  }
 	}
@@ -193,10 +217,7 @@
 		}
 	}
 	.scroll-view-x{
-		height: 280rpx;
-		.experts-list{
-			
-		}
+		height: 300rpx;
 	}
 }
 </style>
