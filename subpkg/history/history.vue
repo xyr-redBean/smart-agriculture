@@ -162,8 +162,11 @@
       },
       // 增添问答
       ToAdd(){
-        console.log(1)
-        this.$router.push('/pages/home/home');
+        console.log(1),
+        // this.$router.push('/pages/home/home');// 小程序好像没用
+        uni.navigateTo({
+          url: '/pages/home/home'
+        });
       }
     }
   }
