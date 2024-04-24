@@ -39,11 +39,11 @@
 				<!-- 第2个面板 -->
 				<view class="panel">
 					<view class="panel-list-item" v-for="(item, index) in panelList2" :key="item.id">
-						<view class="ahead">
-							<uni-icons custom-prefix="iconfont" :type="item.icon" size="21" color="#3ACF78" style="margin-right: 25rpx;"></uni-icons>
-							<text>{{ item.type }}</text>
+						<image :src="`/static/images/${item.icon}`" class="icon">
+						<text>{{ item.type }}</text>
+						<view class="arrow">
+							<uni-icons type="arrowright" size="15"></uni-icons>
 						</view>
-						<uni-icons type="arrowright" size="15"></uni-icons>
 					</view>
 				</view>
 			</view>
@@ -63,10 +63,10 @@
 					{id: 4, icon: "headphones", type: "退款/售后"}
 				],
 				panelList2: [
-					{id: 1, icon: "icon-ic_work_time_normal", type: "AI问答历史记录"},
-					{id: 2, icon: "icon-hx_xingxing", type: "我的收藏"},
-					{id: 3, icon: "icon-jungongguanli", type: "设置"},
-					{id: 4, icon: "icon-questionprompt", type: "常见问题"}
+					{id: 1, icon: "时间.png", type: "AI问答历史记录"},
+					{id: 2, icon: "星星.png", type: "我的收藏"},
+					{id: 3, icon: "设置.png", type: "设置"},
+					{id: 4, icon: "帮助.png", type: "常见问题"}
 				]
 			};
 		},
@@ -159,12 +159,21 @@ page {
 	}
 	
 	.panel-list-item {
+		position: relative;
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
 		font-size: 30rpx;
 		padding: 0 20rpx;
 		line-height: 90rpx;
+		.icon{
+			width: 44rpx;
+			height: 44rpx;
+			margin-right: 25rpx;
+		}
+		.arrow{
+			position: absolute;
+			right: 8rpx;
+		}
 	}
 }
 </style>
