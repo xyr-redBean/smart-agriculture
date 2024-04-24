@@ -292,7 +292,7 @@
 
           img {
             width: 35rpx;
-            height: 30rpx;
+            height: 35rpx;
           }
         }
       }
