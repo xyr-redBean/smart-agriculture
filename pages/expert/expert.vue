@@ -2,11 +2,12 @@
 	<view class="viewport" :style="{ paddingTop: distanceFromTop + 'px' }">
 	    <!-- 自定义导航栏 -->
 	    <view class="top">
-	      <img src="@/static/images/logo.png">
-	      <p>耕农千问</p>
-		 <view style="width: 240rpx" @click="gotoSearch">
+	      <!-- <img src="@/static/images/logo.png">
+	      <p>耕农千问</p> -->
+		  <img src="@/static/images/左上.png" alt="" />
+		  <view style="width: 240rpx" @click="gotoSearch">
 		 	 <u-search placeholder="查询专家" height="60" bgColor="#DFDFDF" :showAction="flase" :disabled="true"></u-search>
-		 </view>
+		  </view>
 	    </view>
 
 		<!-- 轮播图 -->
@@ -145,19 +146,19 @@
   margin-top: 5rpx;
   
   img {
-	height: 52rpx;
-	width: 52rpx;
+	height: 74rpx;
+	width: 260rpx;
 	margin-left: 42rpx;
 	margin-right: 14rpx;
   }
   
-  p {
-	font-size: 48rpx;
-	font-weight: 900;
-	line-height: 74rpx;
-	color: rgba(0, 0, 0, 1);
-	margin-right: 10rpx;
-  }
+ //  p {
+	// font-size: 48rpx;
+	// font-weight: 900;
+	// line-height: 74rpx;
+	// color: rgba(0, 0, 0, 1);
+	// margin-right: 10rpx;
+ //  }
 }
 
 .hot-categories{

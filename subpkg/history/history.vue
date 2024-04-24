@@ -157,8 +157,7 @@
       // 增添问答
       ToAdd(){
         console.log(1),
-        // this.$router.push('/pages/home/home');// 小程序好像没用
-        uni.navigateTo({
+        uni.switchTab({ // 针对tabBar页面跳转
           url: '/pages/home/home'
         });
       }
@@ -170,6 +169,7 @@
   page {
   	height: 100%;
   	background: linear-gradient(180deg, rgba(1, 232, 21, 0.2) 0.07%, rgba(79, 255, 158, 0) 55.38%);
+    background-attachment: fixed; // 将背景设为固定
   }
   .chat-container {
     left: -14rpx;
