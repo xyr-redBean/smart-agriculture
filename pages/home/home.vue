@@ -2,8 +2,6 @@
 <template>
   <view class="container" :style="{ paddingTop: distanceFromTop + 'px', height: windowHeight  + 'px'}">
     <view class="top">
-      <!-- <img src="@/static/images/logo.png" alt="" />
-      <p>耕农千问</p> -->
 	  <img src="@/static/images/左上.png" alt="" />
     </view>
     <view class="content" :class="{ 'Background': history.length <= 0 }">
@@ -147,16 +145,6 @@
       margin-left: 42rpx;
       margin-right: 14rpx;
     }
-
-    // p {
-    //   font-size: 48rpx;
-    //   font-weight: 900;
-    //   letter-spacing: 0px;
-    //   line-height: 74rpx;
-    //   color: rgba(0, 0, 0, 1);
-    //   text-align: left;
-    //   vertical-align: top;
-    // }
   }
 
   .content {

@@ -4,12 +4,12 @@
 		"^expert-(.*)": "@/components/expert-$1/expert-$1.vue",
 		"^my-(.*)": "@/components/my-$1/my-$1.vue"
 	},
-	"pages": [{
-		"path" : "pages/my/my",
+	"pages": [
+	{
+		"path" : "pages/home/home",
 		"style" : 
 		{
-			"navigationBarTitleText": "耕农千问",
-			"navigationBarBackgroundColor": "#CCFAD0",
+			"navigationStyle": "custom",
 			"enablePullDownRefresh" : false
 		}
 	},
@@ -22,10 +22,11 @@
 		}
 	},
 	{
-		"path" : "pages/home/home",
+		"path" : "pages/my/my",
 		"style" : 
 		{
-			"navigationStyle": "custom",
+			"navigationBarTitleText": "耕农千问",
+			"navigationBarBackgroundColor": "#CCFAD0",
 			"enablePullDownRefresh" : false
 		}
 	},
@@ -69,7 +70,8 @@
 				"path" : "settings/settings",
 				"style" : 
 				{
-					"navigationBarTitleText" : "",
+					"navigationBarTitleText": "设置",
+					"navigationBarBackgroundColor": "#CCFAD0",
 					"enablePullDownRefresh" : false
 				}
 			},

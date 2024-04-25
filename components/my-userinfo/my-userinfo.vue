@@ -189,7 +189,7 @@ page {
 		align-items: center;
 		font-size: 30rpx;
 		padding: 0 20rpx;
-		line-height: 90rpx;
+		line-height: 120rpx;
 		border-bottom: 2rpx solid #F4F4F4;
 		.icon{
 			width: 44rpx;
