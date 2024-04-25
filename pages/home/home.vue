@@ -1,6 +1,6 @@
 <!-- 还缺少个将聊天数据传给数据库，这个应该可以等后端弄完再写吧 -->
 <template>
-  <view class="container" :style="{ paddingTop: distanceFromTop + 'px' }">
+  <view class="container" :style="{ paddingTop: distanceFromTop + 'px', height: windowHeight  + 'px'}">
     <view class="top">
       <!-- <img src="@/static/images/logo.png" alt="" />
       <p>耕农千问</p> -->
@@ -47,7 +47,8 @@
         value_ask: '', // 绑定输入框的值
         history: [],
         keyword: '',
-        distanceFromTop: 0,
+        distanceFromTop: 0,//安全距离
+		windowHeight: 0,//可使用窗口高度
         dialoguesAns: [], // 聊天ai回答,用来过渡
       };
     },
@@ -55,8 +56,8 @@
       // 获取屏幕边界到安全区域的一个距离
       const sysInfo = uni.getSystemInfoSync()
       this.distanceFromTop = sysInfo.safeAreaInsets.top
-      // 获取AI问答历史数据
-      // this.getHistory()
+      // 获取可使用的窗口高度
+	  this.windowHeight = sysInfo.windowHeight - sysInfo.safeAreaInsets.top
     },
     methods: {
       async getAnswer() {
@@ -131,8 +132,6 @@
     display: flex;
     flex-direction: column;
     /* 垂直方向排列子元素 */
-    height: calc(100vh - 10rpx);
-    /* 视口高度减去 .top 的高度 */
   }
 
   .top {
@@ -162,9 +161,9 @@
 
   .content {
     &.Background {
-      background: rgba(17, 156, 75, 0.08) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="rgba(58, 207, 120, 0.16)" font-size="80px" font-weight="900" letter-spacing="0px" line-height="118.4px" font-family="Gill Sans, Gill Sans MT, Calibri, Trebuchet MS, sans-serif">耕农千问</text></svg>') center/contain no-repeat !important;
+      background: rgba(17, 156, 75, 0.08) url('@/static/images/耕农千问 _green.png') center/contain no-repeat !important;
     }
-
+	
     position: relative;
     /* 设置相对定位 */
     flex: 1;
