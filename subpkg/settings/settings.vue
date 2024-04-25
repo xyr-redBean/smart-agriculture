@@ -40,7 +40,7 @@
 		},
 		methods: {
 			...mapMutations('m_user', ['updateUserInfo', 'updateToken']),
-			async logout() {
+			async logout(item) {
 				if(item.id === 2){
 					const [err, succ] = await uni.showModal({
 						title: '提示',
