@@ -65,13 +65,13 @@
           this.placeHolder = "正在回答..."
           // 模拟一个长时间的异步操作
           await new Promise(resolve => setTimeout(resolve, 1000));
-          const res = await getAnswerAPI();
+          const res = await getAnswerAPI(value_ask);
           // 处理响应，并存储到dialoguesAns数组中
           const answer = {
-            answer: res.answer, // 假设响应中有一个字段叫做answer，存储AI的回答
+            answer: res.content, 
             id: 1
-          };
-          this.dialoguesAns.push(answer); // 将AI的回答存储到dialoguesAns数组中
+          };		  
+          this.dialoguesAns.push(answer); // 将AI的回答存储到dialoguesAns数组中		  
         } catch (error) {
           // 错误处理逻辑...
         } finally {
