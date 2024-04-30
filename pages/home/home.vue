@@ -1,59 +1,3 @@
-<!-- 还缺少个将聊天数据传给数据库，这个应该可以等后端弄完再写吧 -->
-<!-- <view class="dialogue iAsk">
-  <span>1</span>
-</view>
-<view class="dialogue aiTalk">
-  <span>1</span>
-</view>
-<view class="dialogue iAsk">
-  <span>1</span>
-</view>
-<view class="dialogue aiTalk">
-  <span>1</span>
-</view>
-<view class="dialogue iAsk">
-  <span>1</span>
-</view>
-<view class="dialogue aiTalk">
-  <span>1</span>
-</view>
-<view class="dialogue iAsk">
-  <span>1</span>
-</view>
-<view class="dialogue aiTalk">
-  <span>1</span>
-</view>
-<view class="dialogue iAsk">
-  <span>1</span>
-</view>
-<view class="dialogue aiTalk">
-  <span>1</span>
-</view>
-<view class="dialogue iAsk">
-  <span>1</span>
-</view>
-<view class="dialogue aiTalk">
-  <span>1</span>
-</view>
-<view class="dialogue iAsk">
-  <span>1</span>
-</view>
-<view class="dialogue aiTalk">
-  <span>1</span>
-</view>
-<view class="dialogue iAsk">
-  <span>1</span>
-</view>
-<view class="dialogue aiTalk">
-  <span>1</span>
-</view>
-<view class="dialogue iAsk">
-  <span>1</span>
-</view>
-<view class="dialogue aiTalk">
-  <span>1</span>
-</view> -->
-
 <template>
   <view class="container" :style="{ paddingTop: distanceFromTop + 'px', height: windowHeight  + 'px'}">
     <view class="top">
@@ -62,19 +6,13 @@
     <view class="content" :class="{ 'Background': history.length <= 0 }">
       <view v-if="history.length>=0" class="talking">
         <scroll-view class="dialogue-container" scroll-y :style="{ maxHeight: MaxHeight + 'px'}">
-          <!-- <view v-for="(dialogue, index) in history" :key="index">
+          <view v-for="(dialogue, index) in history" :key="index">
             <view class="dialogue iAsk">
               <span>{{dialogue.ask}}</span>
             </view>
             <view class="dialogue aiTalk">
               <span>{{dialogue.answer}}</span>
             </view>
-          </view> -->
-          <view class="dialogue aiTalk">
-            <span>1</span>
-          </view>
-          <view class="dialogue iAsk">
-            <span>1</span>
           </view>
         </scroll-view>
       </view>
@@ -123,7 +61,7 @@
       const sysInfo = uni.getSystemInfoSync()
       this.distanceFromTop = sysInfo.safeAreaInsets.top
       this.windowHeight = sysInfo.windowHeight
-      this.MaxHeight = this.windowHeight -170
+      this.MaxHeight = this.windowHeight - 165 * (sysInfo.windowWidth / 400)
     },
     methods: {
       async getAnswer(ask_content) {
@@ -232,6 +170,7 @@
     .dialogue {
       display: inline-block;
       padding: 10px 20px;
+      margin: 0 10rpx;
       border-radius: 20px;
       max-width: 70%;
       /* 对话框最大宽度 */
