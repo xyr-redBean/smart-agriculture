@@ -74,9 +74,6 @@
         this.selectedYearMonthIndex = defaultIndex;
       }
     },
-    computed: {
-
-    },
     methods: {
       // 弹出确认删除弹窗
       confirmDelete() {
@@ -147,7 +144,6 @@
           const response = await getHistoryAPI();
           // 将数据存储到 historyTalk 中
           this.historyTalk = response.HISTORY;
-          console.log(this.historyTalk)
           // 数据获取完成后再调用筛选方法
           this.filterSleHistory();
         } catch (error) {

@@ -67,17 +67,17 @@
           await new Promise(resolve => setTimeout(resolve, 1000));
           const res = await getAnswerAPI();
           // 处理响应，并存储到dialoguesAns数组中
-          const answer = {
+          const aianswer = {
             answer: res.answer, // 假设响应中有一个字段叫做answer，存储AI的回答
-            id: 1
+            id: res.id
           };
-          this.dialoguesAns.push(answer); // 将AI的回答存储到dialoguesAns数组中
+          this.dialoguesAns.push(aianswer); // 将AI的回答存储到dialoguesAns数组中
         } catch (error) {
           // 错误处理逻辑...
         } finally {
           this.isSearching = false; // 结束搜索，设置搜索状态为false
           this.placeHolder = "有什么问题尽管问我哦",
-            this.value_ask = ''; // 恢复输入框文字
+          this.value_ask = ''; // 恢复输入框文字
         }
       },
       // 跳转到历史记录
@@ -89,7 +89,8 @@
       // 加新问答
       addPage(){
         // 向后台传数据（暂时没写）
-        this.history = []
+        this.history = [],
+        this.dialoguesAns = []; // 清空dialoguesAns数组
       },
       // 发送消息
       async onClick() {
@@ -107,10 +108,11 @@
         const formattedTime = `${month < 10 ? `0${month}` : month}月${day}日 ${hours}:${minutes}`;
 
         await this.getAnswer();
+        console.log(this.dialoguesAns)
         const question = {
           ask: asking_content, // 获取输入框中的内容
           ask_time: formattedTime, // 存储当前时间
-          answer: this.dialoguesAns[0].answer, // 存储AI的回答，若无回答则为空字符串
+          answer: this.dialoguesAns[0].answer , // 存储AI的回答，若无回答则为空字符串
           id: this.dialoguesAns[0].id // 存储AI的回答的ID，若无回答则为null
         };
         // 将对话记录推入 history 数组中
