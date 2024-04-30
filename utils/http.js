@@ -13,7 +13,7 @@ import store from '@/store/store.js'
  *   4. 添加 token 请求头标识
  */
 
-const baseURL = 'https://mock.apifox.com/m2/4366307-4010223-default'
+const baseURL = 'https://api-ai.vivo.com.cn'
 
 // 添加拦截器
 const httpInterceptor = {
@@ -26,8 +26,8 @@ const httpInterceptor = {
     // 2. 请求超时, 默认 60s
     options.timeout = 10000
     // 3. 添加请求头
-    options.headers = {
-      ...options.headers,
+    options.header = {
+      ...options.header,
     }
     // 4. 添加 token 请求头标识
 	const token = store.state.m_user.token;
@@ -65,6 +65,7 @@ export const http = (options) => {
         } else if (res.statusCode === 401) {
           // 401错误  -> 清理用户信息，跳转到登录页
 		  store.commit('m_user/updateToken');
+		  console.log('错误')
           uni.navigateTo({ url: '/pages/my/my' })
           reject(res)
         } else {
