@@ -1,20 +1,84 @@
 <!-- 还缺少个将聊天数据传给数据库，这个应该可以等后端弄完再写吧 -->
+<!-- <view class="dialogue iAsk">
+  <span>1</span>
+</view>
+<view class="dialogue aiTalk">
+  <span>1</span>
+</view>
+<view class="dialogue iAsk">
+  <span>1</span>
+</view>
+<view class="dialogue aiTalk">
+  <span>1</span>
+</view>
+<view class="dialogue iAsk">
+  <span>1</span>
+</view>
+<view class="dialogue aiTalk">
+  <span>1</span>
+</view>
+<view class="dialogue iAsk">
+  <span>1</span>
+</view>
+<view class="dialogue aiTalk">
+  <span>1</span>
+</view>
+<view class="dialogue iAsk">
+  <span>1</span>
+</view>
+<view class="dialogue aiTalk">
+  <span>1</span>
+</view>
+<view class="dialogue iAsk">
+  <span>1</span>
+</view>
+<view class="dialogue aiTalk">
+  <span>1</span>
+</view>
+<view class="dialogue iAsk">
+  <span>1</span>
+</view>
+<view class="dialogue aiTalk">
+  <span>1</span>
+</view>
+<view class="dialogue iAsk">
+  <span>1</span>
+</view>
+<view class="dialogue aiTalk">
+  <span>1</span>
+</view>
+<view class="dialogue iAsk">
+  <span>1</span>
+</view>
+<view class="dialogue aiTalk">
+  <span>1</span>
+</view> -->
+
 <template>
   <view class="container" :style="{ paddingTop: distanceFromTop + 'px', height: windowHeight  + 'px'}">
     <view class="top">
-	  <img src="@/static/images/左上.png" alt="" />
+      <img src="@/static/images/左上.png" alt="" />
     </view>
     <view class="content" :class="{ 'Background': history.length <= 0 }">
-      <view v-if="history.length>0" class="talking">
-        <view v-for="(dialogue, index) in history" :key="index">
-          <view class="dialogue iAsk">
-            <span>{{dialogue.ask}}</span>
-          </view>
+      <view v-if="history.length>=0" class="talking">
+        <scroll-view class="dialogue-container" scroll-y :style="{ maxHeight: MaxHeight + 'px'}">
+          <!-- <view v-for="(dialogue, index) in history" :key="index">
+            <view class="dialogue iAsk">
+              <span>{{dialogue.ask}}</span>
+            </view>
+            <view class="dialogue aiTalk">
+              <span>{{dialogue.answer}}</span>
+            </view>
+          </view> -->
           <view class="dialogue aiTalk">
-            <span>{{dialogue.answer}}</span>
+            <span>1</span>
           </view>
-        </view>
+          <view class="dialogue iAsk">
+            <span>1</span>
+          </view>
+        </scroll-view>
       </view>
+
       <view class="bottom">
         <view class="ButtonLeft" @click="goToHistory">
           <u-icon class="clock" name="clock" color='green'></u-icon>
@@ -34,11 +98,14 @@
 </template>
 
 <script>
-  import { getAnswerAPI } from '@/services/home'
-  
+  import {
+    getAnswerAPI
+  } from '@/services/home'
+
   export default {
     data() {
       return {
+        MaxHeight: 0,
         isSearching: false,
         placeHolder: "有什么问题尽管问我哦",
         value_ask: '',
@@ -49,12 +116,14 @@
           answer: "默认回答",
           id: 0,
         },
+
       };
     },
     onLoad(options) {
       const sysInfo = uni.getSystemInfoSync()
       this.distanceFromTop = sysInfo.safeAreaInsets.top
-      this.windowHeight = sysInfo.windowHeight - sysInfo.safeAreaInsets.top
+      this.windowHeight = sysInfo.windowHeight
+      this.MaxHeight = this.windowHeight -170
     },
     methods: {
       async getAnswer(ask_content) {
@@ -126,6 +195,7 @@
     display: flex;
     flex-direction: column;
     /* 垂直方向排列子元素 */
+    height: 100vh;
   }
 
   .top {
@@ -147,7 +217,7 @@
     &.Background {
       background: rgba(17, 156, 75, 0.08) url('@/static/images/耕农千问 _green.png') center/contain no-repeat !important;
     }
-	
+
     position: relative;
     /* 设置相对定位 */
     flex: 1;
@@ -200,6 +270,7 @@
       display: flex;
       position: absolute; // 使用绝对定位
       bottom: 0; // 将搜索框定位到容器的底部
+
 
       .ButtonLeft {
         margin-left: 22rpx;
@@ -254,6 +325,7 @@
           /* 占据剩余空间 */
           padding-left: 26rpx;
         }
+
         // 输入框提示词字体样式
         .placeholder-style {
           font-size: 14px;
