@@ -34,98 +34,92 @@
 </template>
 
 <script>
-  import {
-    getAnswerAPI
-  } from '@/services/home'
+  import { getAnswerAPI } from '@/services/home'
+  
   export default {
     data() {
       return {
-        isSearching: false, // 控制搜索图标状态
+        isSearching: false,
         placeHolder: "有什么问题尽管问我哦",
-        value_ask: '', // 绑定输入框的值
-        history: [],
-        keyword: '',
-        distanceFromTop: 0,//安全距离
-		windowHeight: 0,//可使用窗口高度
-        dialoguesAns: [], // 聊天ai回答,用来过渡
+        value_ask: '',
+        history: [], // 修改为存储问题和答案
+        distanceFromTop: 0,
+        windowHeight: 0,
+        dialoguesAns: {
+          answer: "默认回答",
+          id: 0,
+        },
       };
     },
     onLoad(options) {
-      // 获取屏幕边界到安全区域的一个距离
       const sysInfo = uni.getSystemInfoSync()
       this.distanceFromTop = sysInfo.safeAreaInsets.top
-      // 获取可使用的窗口高度
-	  this.windowHeight = sysInfo.windowHeight - sysInfo.safeAreaInsets.top
+      this.windowHeight = sysInfo.windowHeight - sysInfo.safeAreaInsets.top
     },
     methods: {
-      async getAnswer() {
+      async getAnswer(ask_content) {
         try {
-          this.isSearching = true; // 开始搜索，设置搜索状态为true
-          this.value_ask = '',
+          this.isSearching = true;
+          this.value_ask = '';
           this.placeHolder = "正在回答..."
-          // 模拟一个长时间的异步操作
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          const res = await getAnswerAPI();
-          // 处理响应，并存储到dialoguesAns数组中
-          const aianswer = {
-            answer: res.answer, // 假设响应中有一个字段叫做answer，存储AI的回答
-            id: res.id
-          };
-          this.dialoguesAns.push(aianswer); // 将AI的回答存储到dialoguesAns数组中
+          const res = await getAnswerAPI(ask_content);
+          this.dialoguesAns.answer = res.data.content;
+          this.dialoguesAns.id = res.data.requestId;
         } catch (error) {
           // 错误处理逻辑...
         } finally {
-          this.isSearching = false; // 结束搜索，设置搜索状态为false
-          this.placeHolder = "有什么问题尽管问我哦",
-          this.value_ask = ''; // 恢复输入框文字
+          this.isSearching = false;
+          this.placeHolder = "有什么问题尽管问我哦";
+          this.value_ask = '';
         }
       },
-      // 跳转到历史记录
       goToHistory() {
         uni.navigateTo({
           url: '/subpkg/history/history'
         });
       },
-      // 加新问答
-      addPage(){
+      async addPage() {
         // 向后台传数据（暂时没写）
-        this.history = [],
-        this.dialoguesAns = []; // 清空dialoguesAns数组
+        this.history = [];
+        this.dialoguesAns = [];
       },
-      // 发送消息
       async onClick() {
-        // 检查输入框内容是否为空
         if (!this.value_ask.trim()) {
-          return; // 如果为空，直接返回，不执行后续的操作
+          return;
         }
         const asking_content = this.value_ask;
-        const currentTime = new Date(); // 获取当前时间
-        const month = currentTime.getMonth() + 1; // 获取月份
-        const day = currentTime.getDate(); // 获取日期
-        const hours = currentTime.getHours(); // 获取小时
-        const minutes = currentTime.getMinutes(); // 获取分钟
-        // 构建时间字符串，月份补零，日期不补零
+        const currentTime = new Date();
+        const month = currentTime.getMonth() + 1;
+        const day = currentTime.getDate();
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
         const formattedTime = `${month < 10 ? `0${month}` : month}月${day}日 ${hours}:${minutes}`;
 
-        await this.getAnswer();
-        console.log(this.dialoguesAns)
+        // 将问题添加到历史记录中并立即显示
         const question = {
-          ask: asking_content, // 获取输入框中的内容
-          ask_time: formattedTime, // 存储当前时间
-          answer: this.dialoguesAns[0].answer , // 存储AI的回答，若无回答则为空字符串
-          id: this.dialoguesAns[0].id // 存储AI的回答的ID，若无回答则为null
+          ask: asking_content,
+          ask_time: formattedTime,
+          answer: '', // 初始化答案为空
+          id: null // 初始化 ID 为 null
         };
-        // 将对话记录推入 history 数组中
         this.history.push(question);
-        this.dialoguesAns = [], // 清空数组
-          // 清空输入框
-          this.value_ask = '';
-        // 调用回答函数，之后修改得考虑传递参数--问的问题进去，先暂时不管
-        console.log(this.history)
+
+        // 发送问题并等待答案
+        await this.getAnswer(asking_content);
+
+        // 将回答替换到历史记录中
+        const lastQuestionIndex = this.history.length - 1;
+        this.history[lastQuestionIndex].answer = this.dialoguesAns.answer;
+        this.history[lastQuestionIndex].id = this.dialoguesAns.id;
+
+        // 清空输入框
+        this.value_ask = '';
       }
     }
   }
 </script>
+
+
 
 <style lang="scss">
   .container {
@@ -139,7 +133,7 @@
     height: 74rpx;
     text-align: center;
     align-items: center;
-	margin-top: 5rpx;
+    margin-top: 5rpx;
 
     img {
       height: 74rpx;
