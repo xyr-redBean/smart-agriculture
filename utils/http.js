@@ -66,7 +66,9 @@ export const http = (options) => {
           // 401错误  -> 清理用户信息，跳转到登录页
 		  store.commit('m_user/updateToken');
 		  console.log('错误')
-          uni.navigateTo({ url: '/pages/my/my' })
+          uni.switchTab({ // 针对tabBar页面跳转
+            url: '/pages/my/my'
+          });
           reject(res)
         } else {
           // 其他错误 -> 根据后端错误信息轻提示

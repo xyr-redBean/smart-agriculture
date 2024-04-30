@@ -46,11 +46,11 @@
 
 <style lang="scss">
 .container{
-	width: 650rpx;
-	height: 220rpx;
+	width: 690rpx;
+	height: 260rpx;
 	border-radius: 20rpx;
 	background: rgba(255, 255, 255, 1);
-	padding: 30rpx 20rpx;
+	padding: 25rpx 20rpx;
 	margin: 0 30rpx 30rpx 30rpx;
 	.Top{
 		display: flex;

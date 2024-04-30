@@ -1,23 +1,23 @@
 <template>
-	<view class="viewport" :style="{ paddingTop: distanceFromTop + 'px' }">
-	    <!-- 自定义导航栏 -->
-	    <view class="top">
-	      <!-- <img src="@/static/images/logo.png">
-	      <p>耕农千问</p> -->
-		  <img src="@/static/images/左上.png" alt="" />
-		  <view style="width: 240rpx" @click="gotoSearch">
-		 	 <u-search placeholder="查询专家" height="60" bgColor="#DFDFDF" :showAction="flase" :disabled="true"></u-search>
-		  </view>
-	    </view>
+	<view class="viewport">
+		<view class="tab">
+			<view :style="{ height: distanceFromTop + 'px' }" >	</view>
+			<!-- 自定义导航栏 -->
+			<view class="top">
+			  <img src="@/static/images/左上.png" alt="" />
+			  <view style="width: 240rpx" @click="gotoSearch">
+			 	 <u-search placeholder="查询专家" height="60" bgColor="#DFDFDF" :showAction="flase" :disabled="true"></u-search>
+			  </view>
+			</view>
+		</view>
 
 		<!-- 轮播图 -->
-		<view style="margin: 20rpx;">
+		<view style="margin: 0 20rpx; border-radius: 50rpx; overflow: hidden;">
 			<u-swiper
 				:list="list1"
 				indicator
 				indicatorMode="line"
 				circular
-				radius="50"
 				height="180"
 			></u-swiper>
 		</view>
@@ -71,8 +71,7 @@
 				{{ item.finish ? '没有更多数据了~' : '正在加载...' }}
 			  </view>
 			</scroll-view>
-		</view>
-		   
+		</view>		   
 	</view>
 </template>
 
@@ -114,7 +113,6 @@
 		methods: {
 			// 跳转到搜索页
 			gotoSearch() {
-				console.log(111)
 				uni.navigateTo({
 					url: '/subpkg/search/search'
 				})
@@ -137,29 +135,32 @@
 	}
 </script>
 
-<style lang="scss">
-.top {
-  display: flex;
-  height: 74rpx;
-  text-align: center;
-  align-items: center;
-  margin-top: 5rpx;
-  
-  img {
-	height: 74rpx;
-	width: 260rpx;
-	margin-left: 42rpx;
-	margin-right: 14rpx;
-  }
-  
- //  p {
-	// font-size: 48rpx;
-	// font-weight: 900;
-	// line-height: 74rpx;
-	// color: rgba(0, 0, 0, 1);
-	// margin-right: 10rpx;
- //  }
-}
+<style lang="scss">	
+.tab {
+	// 设置定位效果为吸顶
+	position: sticky;
+	// 吸顶的位置
+	top: 0;
+	// 提高层级，防止被覆盖
+	z-index: 999;
+	background-color: #f5f5f5;
+	
+	.top {
+	  display: flex;
+	  height: 100rpx;
+	  text-align: center;
+	  align-items: center;
+	  padding: 5rpx 0 20rpx 0;
+	  	  
+	  img {
+		height: 74rpx;
+		width: 260rpx;
+		margin-left: 42rpx;
+		margin-right: 14rpx;
+	  }
+	}
+}	
+
 
 .hot-categories{
 	.tabs {
@@ -206,7 +207,7 @@
 		align-items: center;
 		height: 80rpx;
 		width: 700rpx;
-		margin: 0 30rpx;
+		margin: 20rpx 30rpx 0 30rpx;
 		.title{
 			font-size: 38rpx;
 			font-weight: 500;

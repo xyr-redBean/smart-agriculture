@@ -61,7 +61,7 @@
       const sysInfo = uni.getSystemInfoSync()
       this.distanceFromTop = sysInfo.safeAreaInsets.top
       this.windowHeight = sysInfo.windowHeight
-      this.MaxHeight = this.windowHeight - 165 * (sysInfo.windowWidth / 400)
+      this.MaxHeight = this.windowHeight - 150 * (sysInfo.windowWidth / 400)
     },
     methods: {
       async getAnswer(ask_content) {
@@ -161,11 +161,12 @@
     flex: 1;
     margin-left: 32rpx;
     margin-right: 32rpx;
-    padding-top: 42rpx;
+    // padding-top: 42rpx;
     opacity: 1;
     border-radius: 32px;
     background-color: rgba(17, 156, 75, 0.08);
     box-shadow: 0px -1px 5px rgba(88, 99, 255, 0.1);
+	overflow: hidden;
 
     .dialogue {
       display: inline-block;

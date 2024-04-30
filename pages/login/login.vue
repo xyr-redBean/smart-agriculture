@@ -98,14 +98,12 @@
 				// 发送请求,获取用户的微信登录信息
 		
 				// 直接把 token 保存到 vuex 中
-				// this.updateToken()
+				this.updateToken('123456')
 				
 				// 页面跳转，跳转到首页
 				this.gotoHome()
 			},
 			gotoHome() {
-			    console.log(123)
-				// why?跳转不了
 				uni.switchTab({ // 针对tabBar页面跳转
 				  url: '/pages/my/my'
 				});
