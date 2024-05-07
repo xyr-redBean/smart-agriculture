@@ -21,7 +21,7 @@
 						</view>
 						<view class="all">
 							全部
-							<uni-icons type="arrowright" size="10"></uni-icons>
+							<uni-icons type="arrowright" size="10" color="rgba(163, 163, 163, 1)"></uni-icons>
 						</view>
 					</view>
 					<view class="panel-body">
@@ -29,7 +29,7 @@
 							<view class="badge">
 								<uni-badge class="uni-badge-left-margin" text="1" />
 							</view>
-							<uni-icons :type="item.icon" size="30"></uni-icons>
+							<image :src="`/static/images/${item.icon}.png`" class="icon1">
 							<text>{{ item.type }}</text>
 						</view>
 						
@@ -39,7 +39,7 @@
 				<!-- 第2个面板 -->
 				<view class="panel">
 					<view class="panel-list-item" v-for="(item, index) in panelList2" :key="item.id" @click="pageJump(item)">
-						<image :src="`/static/images/${item.icon}.png`" class="icon">
+						<image :src="`/static/images/${item.icon}.png`" class="icon2">
 						<text>{{ item.type }}</text>
 						<view class="arrow">
 							<uni-icons type="arrowright" size="15"></uni-icons>
@@ -63,10 +63,10 @@
 		data() {
 			return {
 				panelList1: [
-					{id: 1, icon: "wallet", type: "待付款"},
-					{id: 2, icon: "chatboxes", type: "待回复"},
-					{id: 3, icon: "chat", type: "待评价"},
-					{id: 4, icon: "headphones", type: "退款/售后"}
+					{id: 1, icon: "银行卡", type: "待付款"},
+					{id: 2, icon: "沟通", type: "待回复"},
+					{id: 3, icon: "信息", type: "待评价"},
+					{id: 4, icon: "耳机", type: "退款/售后"}
 				],
 				panelList2: [
 					{id: 1, icon: "时间", type: "AI问答历史记录"},
@@ -117,7 +117,7 @@ page {
 			height: 130rpx;
 			border-radius: 50%;
 			box-shadow: 0rpx 0rpx 10rpx -4rpx rgba(0, 0, 0, 0.25);
-			margin: 20rpx;
+			margin: 0 20rpx 0 30rpx;
 		}
 		.container2 {
 			.tag {
@@ -141,8 +141,7 @@ page {
 		.panel {
 			background-color: white;
 			border-radius: 30rpx;
-			margin-bottom: 60rpx;
-			margin-top: 40rpx;
+			margin: 40rpx 10rpx 60rpx 10rpx;
 			padding: 0 10rpx;
 	
 			.panel-title{
@@ -150,7 +149,6 @@ page {
 				justify-content: space-between;
 				align-items: center;
 				padding-left: 20rpx;			
-				border-bottom: 2rpx solid #F4F4F4;
 				.order{
 					line-height: 90rpx;
 					font-size: 30rpx;
@@ -178,6 +176,10 @@ page {
 						top: 8rpx;
 						left: 52rpx;
 					}
+					.icon1{
+						width: 44rpx;
+						height: 44rpx;
+					}
 				}
 			}
 		}
@@ -191,7 +193,7 @@ page {
 		padding: 0 20rpx;
 		line-height: 120rpx;
 		border-bottom: 2rpx solid #F4F4F4;
-		.icon{
+		.icon2{
 			width: 44rpx;
 			height: 44rpx;
 			margin-right: 25rpx;

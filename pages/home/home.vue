@@ -19,10 +19,12 @@
 
       <view class="bottom">
         <view class="ButtonLeft" @click="goToHistory">
-          <u-icon class="clock" name="clock" color='green'></u-icon>
+          <!-- <u-icon class="clock" name="clock" color='green'></u-icon> -->
+		  <image src="/static/images/时间2.png" class="clock">
         </view>
         <view class="ButtonMiddle" @click="addPage">
-          <u-icon class="circle" name="plus-circle-fill" color='green'></u-icon>
+          <!-- <u-icon class="circle" name="plus-circle-fill" color='green'></u-icon> -->
+		  <image src="/static/images/添加.png" class="circle">
         </view>
         <view class="search" style="margin-left: 15rpx;margin-right: 0;">
           <input class="input" v-model="value_ask" :placeholder="placeHolder" placeholder-class="placeholder-style" />
@@ -226,6 +228,10 @@
         /* 水平居中 */
         align-items: center;
         /* 垂直居中 */
+		.clock{
+		  width: 32rpx;
+		  height: 32rpx;
+		}
       }
 
       .ButtonMiddle {
@@ -242,6 +248,10 @@
         /* 水平居中 */
         align-items: center;
         /* 垂直居中 */
+		.circle{
+		  width: 32rpx;
+		  height: 32rpx;
+		}
       }
 
       .search {

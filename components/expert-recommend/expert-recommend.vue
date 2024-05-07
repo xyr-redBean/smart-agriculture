@@ -42,17 +42,17 @@
 	position: relative; /* 添加相对定位 */
 	overflow: visible; /* 设置溢出为可见 */
 	width: 265rpx;
-	height: 225rpx;
+	height: 215rpx;
 	border-radius: 9.08px;
 	background: rgba(255, 255, 255, 1);
-	margin: 30rpx 20rpx;
+	margin: 30rpx 20rpx 30rpx 0;
 	.top2{
 		display: flex;
 		position: relative; /* 添加相对定位 */
 		overflow: visible; /* 设置溢出为可见 */
 		.avatar2{
-			width: 49.96px;
-			height: 49.96px;
+			width: 100rpx;
+			height: 100rpx;
 			border-radius: 50%;
 			position: absolute; /* 添加绝对定位 */
 			top: -40%; /* 将盒子的上方超出父盒子的 40% */
@@ -61,11 +61,12 @@
 		.name2{
 			display: flex;
 			align-items: center;
-			height: 60rpx;
+			height: 35rpx;
 			font-size: 35rpx;
 			font-weight: 500;
 			color: rgba(34, 34, 34, 1);
 			margin-left: 140rpx;
+			margin-top: 25rpx;
 		}
 	}
 	.center{
@@ -75,7 +76,8 @@
 		margin: 20rpx;
 		.university2{
 			font-size: 28rpx;
-			line-height: 70rpx;
+			line-height: 30rpx;
+			margin: 20rpx 0 12rpx 0;
 			color: rgba(96, 102, 114, 1);
 		}
 		.introduction{

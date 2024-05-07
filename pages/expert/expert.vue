@@ -12,7 +12,7 @@
 		</view>
 
 		<!-- 轮播图 -->
-		<view style="margin: 0 20rpx; border-radius: 50rpx; overflow: hidden;">
+		<view style="margin: 0 30rpx; border-radius: 50rpx; overflow: hidden;">
 			<u-swiper
 				:list="list1"
 				indicator
@@ -178,7 +178,8 @@
 	  }
 	  .active {
 		  font-size: 35rpx;
-		color: black;
+		  font-weight: 600;
+		  color: black;
 	    &::after {
 	      content: '';
 	      width: 40rpx;
@@ -220,6 +221,7 @@
 	}
 	.scroll-view-x{
 		height: 300rpx;
+		margin: 0 30rpx;
 	}
 }
 </style>

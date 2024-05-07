@@ -98,7 +98,7 @@ page {
 			height: 130rpx;
 			border-radius: 50%;
 			box-shadow: 0rpx 0rpx 10rpx -4rpx rgba(0, 0, 0, 0.25);
-			margin: 20rpx;
+			margin: 0 20rpx 0 30rpx;
 		}
 		.container2 {
 			.tag {
@@ -116,8 +116,7 @@ page {
 		.panel {
 			background-color: white;
 			border-radius: 30rpx;
-			margin-bottom: 60rpx;
-			margin-top: 40rpx;
+			margin: 40rpx 10rpx 60rpx 10rpx;
 			padding: 0 10rpx;
 	
 			.panel-title{
@@ -159,7 +158,7 @@ page {
 		align-items: center;
 		font-size: 30rpx;
 		padding: 0 20rpx;
-		line-height: 90rpx;
+		line-height: 120rpx;
 		border-bottom: 2rpx solid #F4F4F4;
 		.icon{
 			width: 44rpx;

@@ -165,8 +165,8 @@ page {
   .agreement{
 	  display: flex;
 	  text-align: center;
-	  margin-left: 6vw;
 	  margin-top: 15rpx;
+	  margin-left: 55rpx;
 	  .text{
 		margin-top: 7rpx;
 	  	font-size: 22rpx;
