@@ -136,6 +136,7 @@
     flex-direction: column;
     /* 垂直方向排列子元素 */
     height: 100vh;
+    padding-bottom: 18rpx;
   }
 
   .top {
@@ -144,6 +145,7 @@
     text-align: center;
     align-items: center;
     margin-top: 5rpx;
+    margin-bottom: 18rpx;
 
     img {
       height: 74rpx;
