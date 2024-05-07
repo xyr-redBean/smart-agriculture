@@ -4,12 +4,15 @@
       <img src="@/static/images/左上.png" alt="" />
     </view>
     <view class="content" :class="{ 'Background': history.length <= 0 }">
+
       <view v-if="history.length>=0" class="talking">
         <scroll-view class="dialogue-container" scroll-y :style="{ maxHeight: MaxHeight + 'px'}">
           <view v-for="(dialogue, index) in history" :key="index">
-            <view class="dialogue iAsk">
-              <span>{{dialogue.ask}}</span>
-            </view>
+           <view class="BOX">
+             <view class="dialogue iAsk">
+               <span>{{dialogue.ask}}</span>
+             </view>
+           </view>
             <view class="dialogue aiTalk">
               <span>{{dialogue.answer}}</span>
             </view>
@@ -20,11 +23,11 @@
       <view class="bottom">
         <view class="ButtonLeft" @click="goToHistory">
           <!-- <u-icon class="clock" name="clock" color='green'></u-icon> -->
-		  <image src="/static/images/时间2.png" class="clock">
+          <image src="/static/images/时间2.png" class="clock">
         </view>
         <view class="ButtonMiddle" @click="addPage">
           <!-- <u-icon class="circle" name="plus-circle-fill" color='green'></u-icon> -->
-		  <image src="/static/images/添加.png" class="circle">
+          <image src="/static/images/添加.png" class="circle">
         </view>
         <view class="search" style="margin-left: 15rpx;margin-right: 0;">
           <input class="input" v-model="value_ask" :placeholder="placeHolder" placeholder-class="placeholder-style" />
@@ -32,8 +35,12 @@
             <img :src="isSearching ? '/static/images/loading.png' : '/static/images/search.png'" alt="" />
           </view>
         </view>
+
       </view>
     </view>
+
+
+
   </view>
 </template>
 
@@ -45,6 +52,7 @@
   export default {
     data() {
       return {
+        isProcessing: false,// 回答获取ing
         MaxHeight: 0,
         isSearching: false,
         placeHolder: "有什么问题尽管问我哦",
@@ -96,6 +104,10 @@
         if (!this.value_ask.trim()) {
           return;
         }
+        if(this.isProcessing){
+          return;
+        }
+        this.isProcessing = true;
         const asking_content = this.value_ask;
         const currentTime = new Date();
         const month = currentTime.getMonth() + 1;
@@ -103,7 +115,6 @@
         const hours = currentTime.getHours();
         const minutes = currentTime.getMinutes();
         const formattedTime = `${month < 10 ? `0${month}` : month}月${day}日 ${hours}:${minutes}`;
-
         // 将问题添加到历史记录中并立即显示
         const question = {
           ask: asking_content,
@@ -112,7 +123,7 @@
           id: null // 初始化 ID 为 null
         };
         this.history.push(question);
-
+        
         // 发送问题并等待答案
         await this.getAnswer(asking_content);
 
@@ -122,7 +133,10 @@
         this.history[lastQuestionIndex].id = this.dialoguesAns.id;
 
         // 清空输入框
-        this.value_ask = '';
+        if(!this.ifClick){
+          this.value_ask = '';
+        }
+        this.isProcessing = false;
       }
     }
   }
@@ -136,6 +150,7 @@
     flex-direction: column;
     /* 垂直方向排列子元素 */
     height: 100vh;
+    padding-bottom: 18rpx;
   }
 
   .top {
@@ -144,6 +159,7 @@
     text-align: center;
     align-items: center;
     margin-top: 5rpx;
+    margin-bottom: 18rpx;
 
     img {
       height: 74rpx;
@@ -168,7 +184,7 @@
     border-radius: 32px;
     background-color: rgba(17, 156, 75, 0.08);
     box-shadow: 0px -1px 5px rgba(88, 99, 255, 0.1);
-	overflow: hidden;
+    overflow: hidden;
 
     .dialogue {
       display: inline-block;
@@ -180,7 +196,10 @@
       margin-bottom: 10px;
       clear: both;
     }
-
+    
+    .BOX{
+      padding-top: 12rpx;
+    }
     .iAsk {
       float: right;
       /* iAsk 浮动到右边 */
@@ -227,11 +246,12 @@
         justify-content: center;
         /* 水平居中 */
         align-items: center;
+
         /* 垂直居中 */
-		.clock{
-		  width: 32rpx;
-		  height: 32rpx;
-		}
+        .clock {
+          width: 32rpx;
+          height: 32rpx;
+        }
       }
 
       .ButtonMiddle {
@@ -247,11 +267,12 @@
         justify-content: center;
         /* 水平居中 */
         align-items: center;
+
         /* 垂直居中 */
-		.circle{
-		  width: 32rpx;
-		  height: 32rpx;
-		}
+        .circle {
+          width: 32rpx;
+          height: 32rpx;
+        }
       }
 
       .search {

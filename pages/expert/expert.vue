@@ -36,7 +36,7 @@
 			  class="scroll-view-x"
 			>
 			  <view style="display: flex;">
-			  	<view class="experts-list" v-for="(item, index) in expertsRecommend" :key="item.id">
+			  	<view class="experts-list" v-for="(item, index) in expertsRecommend" :key="item.id" :class="{ 'first-box': index === 0 }">
 			  		<expert-recommend :dataProp="item" @navigate="handleNavigate"></expert-recommend>
 			  	</view>
 			  </view>
@@ -221,7 +221,10 @@
 	}
 	.scroll-view-x{
 		height: 300rpx;
-		margin: 0 30rpx;
+		
+		.first-box{
+			margin-left: 30rpx;
+		}
 	}
 }
 </style>
