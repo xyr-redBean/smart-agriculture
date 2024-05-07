@@ -4,12 +4,15 @@
       <img src="@/static/images/左上.png" alt="" />
     </view>
     <view class="content" :class="{ 'Background': history.length <= 0 }">
+
       <view v-if="history.length>=0" class="talking">
         <scroll-view class="dialogue-container" scroll-y :style="{ maxHeight: MaxHeight + 'px'}">
           <view v-for="(dialogue, index) in history" :key="index">
-            <view class="dialogue iAsk">
-              <span>{{dialogue.ask}}</span>
-            </view>
+           <view class="BOX">
+             <view class="dialogue iAsk">
+               <span>{{dialogue.ask}}</span>
+             </view>
+           </view>
             <view class="dialogue aiTalk">
               <span>{{dialogue.answer}}</span>
             </view>
@@ -20,11 +23,11 @@
       <view class="bottom">
         <view class="ButtonLeft" @click="goToHistory">
           <!-- <u-icon class="clock" name="clock" color='green'></u-icon> -->
-		  <image src="/static/images/时间2.png" class="clock">
+          <image src="/static/images/时间2.png" class="clock">
         </view>
         <view class="ButtonMiddle" @click="addPage">
           <!-- <u-icon class="circle" name="plus-circle-fill" color='green'></u-icon> -->
-		  <image src="/static/images/添加.png" class="circle">
+          <image src="/static/images/添加.png" class="circle">
         </view>
         <view class="search" style="margin-left: 15rpx;margin-right: 0;">
           <input class="input" v-model="value_ask" :placeholder="placeHolder" placeholder-class="placeholder-style" />
@@ -32,8 +35,12 @@
             <img :src="isSearching ? '/static/images/loading.png' : '/static/images/search.png'" alt="" />
           </view>
         </view>
+
       </view>
     </view>
+
+
+
   </view>
 </template>
 
@@ -170,7 +177,7 @@
     border-radius: 32px;
     background-color: rgba(17, 156, 75, 0.08);
     box-shadow: 0px -1px 5px rgba(88, 99, 255, 0.1);
-	overflow: hidden;
+    overflow: hidden;
 
     .dialogue {
       display: inline-block;
@@ -182,7 +189,10 @@
       margin-bottom: 10px;
       clear: both;
     }
-
+    
+    .BOX{
+      padding-top: 12rpx;
+    }
     .iAsk {
       float: right;
       /* iAsk 浮动到右边 */
@@ -229,11 +239,12 @@
         justify-content: center;
         /* 水平居中 */
         align-items: center;
+
         /* 垂直居中 */
-		.clock{
-		  width: 32rpx;
-		  height: 32rpx;
-		}
+        .clock {
+          width: 32rpx;
+          height: 32rpx;
+        }
       }
 
       .ButtonMiddle {
@@ -249,11 +260,12 @@
         justify-content: center;
         /* 水平居中 */
         align-items: center;
+
         /* 垂直居中 */
-		.circle{
-		  width: 32rpx;
-		  height: 32rpx;
-		}
+        .circle {
+          width: 32rpx;
+          height: 32rpx;
+        }
       }
 
       .search {
