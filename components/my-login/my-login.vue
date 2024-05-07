@@ -22,7 +22,7 @@
 					</view>
 					<view class="panel-body">
 						<view class="panel-item" v-for="(item, index) in panelList1" :key="item.id">
-							<uni-icons :type="item.icon" size="30"></uni-icons>
+							<image :src="`/static/images/${item.icon}.png`" class="icon1">
 							<text>{{ item.type }}</text>
 						</view>
 					</view>
@@ -31,7 +31,7 @@
 				<!-- 第2个面板 -->
 				<view class="panel">
 					<view class="panel-list-item" v-for="(item, index) in panelList2" :key="item.id" @click="pageJump(item)">
-						<image :src="`/static/images/${item.icon}.png`" class="icon">
+						<image :src="`/static/images/${item.icon}.png`" class="icon2">
 						<text>{{ item.type }}</text>
 						<view class="arrow">
 							<uni-icons type="arrowright" size="15"></uni-icons>
@@ -50,10 +50,10 @@
 			return {
 				distanceFromTop: 0,
 				panelList1: [
-					{id: 1, icon: "wallet", type: "待付款"},
-					{id: 2, icon: "chatboxes", type: "待回复"},
-					{id: 3, icon: "chat", type: "待评价"},
-					{id: 4, icon: "headphones", type: "退款/售后"}
+					{id: 1, icon: "银行卡", type: "待付款"},
+					{id: 2, icon: "沟通", type: "待回复"},
+					{id: 3, icon: "信息", type: "待评价"},
+					{id: 4, icon: "耳机", type: "退款/售后"}
 				],
 				panelList2: [
 					{id: 1, icon: "设置", type: "设置"},
@@ -124,7 +124,6 @@ page {
 				justify-content: space-between;
 				align-items: center;
 				padding-left: 20rpx;			
-				border-bottom: 2rpx solid #F4F4F4;
 				.order{
 					line-height: 90rpx;
 					font-size: 30rpx;
@@ -147,6 +146,11 @@ page {
 					justify-content: space-around;
 					padding: 20rpx 0;
 					font-size: 26rpx;
+					
+					.icon1{
+						width: 44rpx;
+						height: 44rpx;
+					}
 				}
 			}
 		}
@@ -160,7 +164,7 @@ page {
 		padding: 0 20rpx;
 		line-height: 120rpx;
 		border-bottom: 2rpx solid #F4F4F4;
-		.icon{
+		.icon2{
 			width: 44rpx;
 			height: 44rpx;
 			margin-right: 25rpx;
