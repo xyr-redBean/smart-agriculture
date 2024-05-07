@@ -52,6 +52,7 @@
   export default {
     data() {
       return {
+        isProcessing: false,// 回答获取ing
         MaxHeight: 0,
         isSearching: false,
         placeHolder: "有什么问题尽管问我哦",
@@ -103,6 +104,10 @@
         if (!this.value_ask.trim()) {
           return;
         }
+        if(this.isProcessing){
+          return;
+        }
+        this.isProcessing = true;
         const asking_content = this.value_ask;
         const currentTime = new Date();
         const month = currentTime.getMonth() + 1;
@@ -110,7 +115,6 @@
         const hours = currentTime.getHours();
         const minutes = currentTime.getMinutes();
         const formattedTime = `${month < 10 ? `0${month}` : month}月${day}日 ${hours}:${minutes}`;
-
         // 将问题添加到历史记录中并立即显示
         const question = {
           ask: asking_content,
@@ -119,7 +123,7 @@
           id: null // 初始化 ID 为 null
         };
         this.history.push(question);
-
+        
         // 发送问题并等待答案
         await this.getAnswer(asking_content);
 
@@ -129,7 +133,10 @@
         this.history[lastQuestionIndex].id = this.dialoguesAns.id;
 
         // 清空输入框
-        this.value_ask = '';
+        if(!this.ifClick){
+          this.value_ask = '';
+        }
+        this.isProcessing = false;
       }
     }
   }
