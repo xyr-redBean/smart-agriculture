@@ -139,6 +139,7 @@ page {
 				justify-content: space-around;
 	
 				.panel-item {
+					flex: 1;
 					position: relative;
 					display: flex;
 					flex-direction: column;

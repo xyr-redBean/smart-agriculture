@@ -164,6 +164,7 @@ page {
 				justify-content: space-around;
 	
 				.panel-item {
+					flex: 1;
 					position: relative;
 					display: flex;
 					flex-direction: column;
@@ -173,8 +174,8 @@ page {
 					font-size: 26rpx;
 					.badge{
 						position: absolute;
-						top: 8rpx;
-						left: 52rpx;
+						top: 0rpx;
+						left: 90rpx;
 					}
 					.icon1{
 						width: 44rpx;
