@@ -1,7 +1,7 @@
 <template>
 	<view class="container2">
 		<view class="top2">
-			<image src="https://img.js.design/assets/smartFill/img328164da748e08.jpeg" class="avatar2" />
+			<image :src="dataProp.img" class="avatar2" />
 			<view class="name2">{{ dataProp.name }}</view>
 		</view>
 		<view class="center">
