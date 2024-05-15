@@ -79,7 +79,8 @@
         // 专家信息
         expertsCategory: [{
           id: 1,
-          name: "王博士"
+          name: "王博士",
+          img:"/static/images/expert1.png"
         }],
 
         focusState: true, // 输入框
