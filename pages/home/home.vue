@@ -173,7 +173,6 @@
       },
       // 点击提问获得输入框焦点
       focusSearchInput() {
-        console.log("聚焦输入框方法被调用");
         this.$nextTick(() => {
           this.focusState = true
         })
@@ -208,25 +207,28 @@
 <style scoped lang="scss">
   // 静态部分-博士XX
   .content {
-    .BBBOX{
+    .BBBOX {
       padding-right: 10rpx;
       margin-left: 10rpx;
     }
-    .content-expert{
+
+    .content-expert {
       padding-left: -10rpx;
     }
+
     .experts {
       display: inline-block;
       max-height: 250rpx;
       width: 100%;
       overflow: hidden;
       border-radius: 20rpx;
+
       /* 防止滚动 */
-      /deep/ .container{
+      /deep/ .container {
         margin: 0 0 0 0 !important;
         margin-left: 1rpx;
       }
-      
+
     }
   }
 
@@ -465,6 +467,11 @@
           margin-top: 5px;
           margin-bottom: 30rpx;
 
+          // 去除圆角边框
+          button::after {
+            border: none;
+          }
+
           button {
             display: flex;
             justify-content: center;
@@ -473,9 +480,9 @@
             width: 100%;
             height: 80rpx;
             cursor: pointer;
-            margin-top: rpx;
             margin-top: 12rpx;
             border-radius: 30rpx;
+            border: none;
 
             &.first-botton {
               background-color: #3acf78;
